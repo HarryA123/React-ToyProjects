@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import HomeButton from "../components/HomeButton";
 
 function Detail() {
   const { id } = useParams();
@@ -20,6 +21,7 @@ function Detail() {
 
   return (
     <>
+      <HomeButton/>
       {loading ? (
         <h2>loading...</h2>
       ) : (

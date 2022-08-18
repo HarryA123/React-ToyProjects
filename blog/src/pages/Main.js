@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const Main = () => {
   const writeBtn = () => {};
-  const [postList, setPostList] = useState([])
+  // const [postList, setPostList] = useState([]);
+  const stateTitle = useSelector(state=>state.posting.title)
   return (
     <>
       <h1>🧁Blog🍹</h1>
@@ -11,9 +12,9 @@ const Main = () => {
       <Link to="/post">
         <button onClick={writeBtn}>글쓰기</button>
       </Link>
-      <ul>
-        <div>{postList}</div>
-      </ul>
+      <Link to={`/${stateTitle}`}>
+        <h3>{stateTitle}</h3>
+      </Link>
     </>
   );
 };

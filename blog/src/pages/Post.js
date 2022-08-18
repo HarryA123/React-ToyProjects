@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { useState, useRef } from "react";
+import { useDispatch } from "react-redux";
 
 const Post = () => {
+  const dispatch = useDispatch()
   const [titleInput, setTitleInput] = useState('');
   const [contentInput, setContentInput] = useState('');
   const titleInValid= titleInput.length >4 && titleInput.length < 30;
@@ -22,6 +24,8 @@ const Post = () => {
     } else if(!contentInValid) {
       contentRef.current.focus()
       event.preventDefault()
+    } else{
+      dispatch({type:'POST_SUCCESS', payload: {title:titleInput, content:contentInput}})
     }
   };
 

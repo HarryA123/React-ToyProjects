@@ -1,16 +1,17 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 
 const INITIAL_STATE ={
-  title: '',
-  content: '',
+  title: [],
+  content: [],
 }
 
 const postingReducer =(state=INITIAL_STATE, action)=>{
   switch(action.type){
-    case 'POST' :
+    case 'POST_SUCCESS' :
       return {
         ...state,
-        title: action.payload,
+        title: state.title.concat(action.payload.title),
+        content: state.content.concat(action.payload.content),
       }
     default :
       return state;

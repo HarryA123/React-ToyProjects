@@ -1,23 +1,23 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import { createStore, combineReducers } from "redux";
 
-const INITIAL_STATE ={
-  title: [],
-  content: [],
-}
+const INITIAL_STATE = []
 
-const postingReducer =(state=INITIAL_STATE, action)=>{
-  switch(action.type){
-    case 'POST_SUCCESS' :
-      return {
-        ...state,
-        title: state.title.concat(action.payload.title),
-        content: state.content.concat(action.payload.content),
-      }
-    default :
-      return state;
+const postingReducer =(state , action)=>{
+  if(action.type === 'POST_SUCCESS'){
+    const newPost = {
+      title:action.payload.title,
+      content:action.payload.content
+    };
+    return state.concat(newPost)
+  }
+    return INITIAL_STATE;
   } 
-}
 
+// addTodo: (state, action) => { 
+//   const newTodo = {
+//     id: Date.now(), title:action.payload.title, 
+//     contents: action.payload.contents, complted:false,
+//   }; state.push(newTodo);
 
 const store = createStore(combineReducers({
   posting: postingReducer,

@@ -1,13 +1,17 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom';
 
 function Posting() {
-  const stateTitle = useSelector(state=>state.posting.title);
-  const stateContent = useSelector(state=>state.posting.content);
+  const state = useSelector(state=>state.posting);
+  let params  = useParams();
+  console.log(params.title)
+  console.log(state)
   return (
   <>
-    <h3>{stateTitle}</h3>
-    <p>{stateContent}</p>
+    <h3>{state[params.title].title}</h3>
+    <p>{state[params.title].content}</p>
+    <br/>
   </>
   )
 }

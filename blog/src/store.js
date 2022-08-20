@@ -9,15 +9,13 @@ const postingReducer =(state , action)=>{
       content:action.payload.content
     };
     return state.concat(newPost)
+  } 
+  else if(action.type === 'DELETE_BTN'){
+    return state.filter(item=> {
+      return item.title !== action.payload})
   }
     return INITIAL_STATE;
   } 
-
-// addTodo: (state, action) => { 
-//   const newTodo = {
-//     id: Date.now(), title:action.payload.title, 
-//     contents: action.payload.contents, complted:false,
-//   }; state.push(newTodo);
 
 const store = createStore(combineReducers({
   posting: postingReducer,

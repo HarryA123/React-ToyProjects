@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Main = () => {
-  const stateTitle = useSelector((state) => state.posting);
-  console.log(stateTitle)
+  const state = useSelector(state => state.posting);
   return (
     <>
       <h1>🧁Blog🍹</h1>
@@ -12,13 +11,10 @@ const Main = () => {
       <br />
       <br />
       <ul>
-        {stateTitle.map((item,index)=>{
-          console.log(item)
-          const {title, content} = item;
-          console.log(title, content)
-          return <Link to={`/${index}`} key={index}><h2>{title}</h2></Link>
-          
-          // <Link to={`/${stateTitle[index]}`} key={index}><span>{item}</span><br/></Link>
+        {state.map((item,index)=>{
+          const {title} = item;
+          return <Link to={`/${index}`} key={index}><li>{title}
+          </li></Link>
         })}
       </ul>
       <br />

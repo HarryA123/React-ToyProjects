@@ -1,32 +1,57 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
+import Button from "./buttons/Button";
+
+const Container = styled.div`
+  height: 30em;
+  border-radius: 1em;
+  padding: 1em;
+  margin: 8em 20em 0;
+  position: relative;
+`
+
+const InputStyle = styled.input`
+  margin: 0.4em auto;
+  width: 100%;
+  border: none;
+  font-size: 28px;
+  ::placeholder{
+    font-weight: bolder;
+  }
+  &:focus{
+    outline: none;
+  }
+  &:focus::placeholder{
+    color: transparent;
+  }
+`
+
+const TextAreaStyle = styled.textarea`
+  width: 100%;
+  height: 20em;
+  border: none;
+  resize: none;
+  &:focus{
+    outline: none;
+  }
+  &:focus::placeholder{
+    color: transparent;
+  }
+`
 
 const EditForm = () => {
-  const dispatch = useDispatch();
   const state = useSelector((state) => state.posting);
   const params = useParams();
   const [titleInput, setTitleInput] = useState(state[params.index].title);
   const [contentInput, setContentInput] = useState(state[params.index].content);
 
-  const publishBtn = () => {
-    return dispatch({
-      type: "POST_EDIT_SUCCESS",
-      payload: {
-        index: params.index,
-        title: titleInput,
-        content: contentInput,
-      },
-    });
-  };
-
   return (
     <>
-      <form>
+    <Container>
         <div>
-          <label htmlFor="Title">Title</label>
-          <br />
-          <input
+          <InputStyle
             id="Title"
             value={titleInput}
             onChange={(event) => {
@@ -34,13 +59,9 @@ const EditForm = () => {
             }}
             type="text"
           />
-          <br />
         </div>
-        <br />
         <div>
-          <label htmlFor="Content">Content</label>
-          <br />
-          <textarea
+          <TextAreaStyle
             id="Content"
             value={contentInput}
             onChange={(event) => {
@@ -48,14 +69,9 @@ const EditForm = () => {
             }}
             type="text"
           />
-          <br />
         </div>
-        <div>
-          <Link to="/">
-            <button onClick={publishBtn}>Modify</button>
-          </Link>
-        </div>
-      </form>
+          <Button titleInput={titleInput} contentInput={contentInput}  modified={'수정완료'}></Button>
+      </Container>
     </>
   );
 };

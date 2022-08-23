@@ -1,9 +1,46 @@
-import { Link } from "react-router-dom";
 import { useState, useRef } from "react";
-import { useDispatch } from "react-redux";
+import styled from "styled-components";
+import Button from "./buttons/Button";
+
+const ContainerStyle = styled.div`
+  height: 30em;
+  /* border: 2px solid gray; */
+  border-radius: 1em;
+  padding: 1em;
+  margin: 8em 20em 0;
+  position: relative;
+`;
+
+const InputStyle = styled.input`
+  margin: 0.4em auto;
+  width: 100%;
+  border: none;
+  font-size: 28px;
+  ::placeholder {
+    font-weight: bolder;
+  }
+  &:focus {
+    outline: none;
+  }
+  &:focus::placeholder {
+    color: transparent;
+  }
+`;
+
+const TextAreaStyle = styled.textarea`
+  width: 100%;
+  height: 20em;
+  border: none;
+  resize: none;
+  &:focus {
+    outline: none;
+  }
+  &:focus::placeholder {
+    color: transparent;
+  }
+`;
 
 const CreateForm = () => {
-  const dispatch = useDispatch();
   const [titleInput, setTitleInput] = useState("");
   const [contentInput, setContentInput] = useState("");
   const titleInValid = titleInput.length > 0 && titleInput.length < 30;
@@ -17,61 +54,39 @@ const CreateForm = () => {
   const contentChange = (event) => {
     setContentInput(event.target.value);
   };
-  const publishBtn = (event) => {
-    if (!titleInValid) {
-      titleRef.current.focus();
-      event.preventDefault();
-    } else if (!contentInValid) {
-      contentRef.current.focus();
-      event.preventDefault();
-    } else {
-      dispatch({
-        type: "POST_SUCCESS",
-        payload: {
-          title: titleInput,
-          content: contentInput,
-        },
-      });
-    }
-  };
+
   return (
-    <>
+    <ContainerStyle>
       <form>
+        <InputStyle
+          placeholder="Title"
+          id="Title"
+          ref={titleRef}
+          value={titleInput}
+          onChange={titleChange}
+          type="text"
+        />
+        <TextAreaStyle
+          placeholder="Content"
+          id="Content"
+          ref={contentRef}
+          value={contentInput}
+          onChange={contentChange}
+          type="text"
+        />
         <div>
-          <label htmlFor="Title">제목</label>
-          <br />
-          <input
-            id="Title"
-            ref={titleRef}
-            value={titleInput}
-            onChange={titleChange}
-            type="text"
-            size={30}
-          />
-          <br />
-          {!titleInValid && "제목을 간결하게 작성해주세요."}
-        </div>
-        <br />
-        <div>
-          <label htmlFor="Content">내용</label>
-          <br />
-          <textarea
-            id="Content"
-            ref={contentRef}
-            value={contentInput}
-            onChange={contentChange}
-            type="text"
-          />
-          <br />
-          {!contentInValid && "내용을 간결하게 작성해주세요."}
-        </div>
-        <div>
-          <Link to="/">
-            <button onClick={publishBtn}>올리기</button>
-          </Link>
+          <Button
+            contentInValid={contentInValid}
+            titleInValid={titleInValid}
+            contentRef={contentRef}
+            titleRef={titleRef}
+            publish={"올리기"}
+            titleInput={titleInput}
+            contentInput={contentInput}
+          ></Button>
         </div>
       </form>
-    </>
+    </ContainerStyle>
   );
 };
 

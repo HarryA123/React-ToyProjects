@@ -17,7 +17,7 @@ const Main = () => {
       const response = await axios.get(
         `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchKeyword}&page=${page}&sort=newest&api-key=${process.env.REACT_APP_API_KEY}`
       );
-      // console.log(response)
+      console.log(response.data.response.docs);
       setArticles(response.data.response.docs);
     } catch (e) {
       console.log(e);
@@ -59,16 +59,16 @@ const Main = () => {
       <input 
       value={value}
       onChange={onChange}
-      
       />
       <button> click</button>
       </form>
-      <Link to={'/clip'}><button>clips📌</button></Link>
+      <Link to={'/clips'}><button>clips📌</button></Link>
       <h2>{loading ? "뉴스를 불러오고 있습니다📰" : null}</h2>
       <div>
         {articles && articles.map((ele) => (
           <div key={ele._id}>
-            <span onClick={clipBtn}> 📌</span><strong>{ele.headline.main}</strong>
+            <span onClick={clipBtn}> 📌</span>
+            <a href={ele.web_url}>{ele.headline.main}</a>
             <p>{ele.lead_paragraph}</p>
             <p>{ele.pub_date.slice(0,10).replaceAll('-','.')}</p>
             <br/><br/>

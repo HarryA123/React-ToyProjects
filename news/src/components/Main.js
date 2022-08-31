@@ -3,6 +3,7 @@ import axios from "axios";
 import { useDispatch  }from 'react-redux';
 import { newsSlice } from "../store/store";
 import { Link } from 'react-router-dom';
+import Article from './Article'
 
 const Main = () => {
   const [articles, setArticles] = useState(null);
@@ -46,10 +47,6 @@ const Main = () => {
         e.preventDefault()
         console.log('1. 검색창이 비었어요. ')
       }
-    
-  }
-  const clipBtn = ()=>{
-    dispatch(newsSlice.actions.clip())
   }
 
   return (
@@ -66,13 +63,7 @@ const Main = () => {
       <h2>{loading ? "뉴스를 불러오고 있습니다📰" : null}</h2>
       <div>
         {articles && articles.map((ele) => (
-          <div key={ele._id}>
-            <span onClick={clipBtn}> 📌</span>
-            <a href={ele.web_url}>{ele.headline.main}</a>
-            <p>{ele.lead_paragraph}</p>
-            <p>{ele.pub_date.slice(0,10).replaceAll('-','.')}</p>
-            <br/><br/>
-          </div>
+          <Article key={ele._id} ele={ele}/>
         ))}
       </div>
     </>

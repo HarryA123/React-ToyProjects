@@ -11,21 +11,19 @@ const Main = () => {
   const dispatch = useDispatch();
   // const isClipped = useSelector((state)=>state.news.isClipped)
 
-  const api = async (searchKeyword) => {
+  const api = async (searchKeyword, page=1) => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://newsapi.org/v2/everything?q=${searchKeyword}&apiKey=${process.env.REACT_APP_API_KEY}`
+        `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchKeyword}&page=${page}&sort=newest&api-key=${process.env.REACT_APP_API_KEY}`
       );
       // console.log(response)
-      console.log(response.data.articles);
-      setArticles(response.data.articles);
+      setArticles(response.data.response.docs);
     } catch (e) {
       console.log(e);
     }
     setLoading(false);
   };
-
   // const onClick = ()=>{
   //   api()
   //   console.log('click으로 api를 호출했습니다. 잠시만 기다리세요!')
@@ -69,10 +67,10 @@ const Main = () => {
       <h2>{loading ? "뉴스를 불러오고 있습니다📰" : null}</h2>
       <div>
         {articles && articles.map((ele) => (
-          <div key={ele.url}>
-            <span onClick={clipBtn}> 📌</span><strong>{ele.title}</strong>
-            <p>{ele.description}</p>
-            <p>{ele.publishedAt.slice(0,10).replaceAll('-','.')}</p>
+          <div key={ele._id}>
+            <span onClick={clipBtn}> 📌</span><strong>{ele.headline.main}</strong>
+            <p>{ele.lead_paragraph}</p>
+            <p>{ele.pub_date.slice(0,10).replaceAll('-','.')}</p>
             <br/><br/>
           </div>
         ))}

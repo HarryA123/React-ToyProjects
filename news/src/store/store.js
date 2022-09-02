@@ -22,6 +22,49 @@ export const getArticle = createAsyncThunk('newsSlice/getArticle', async ({value
 //   }
 // };
 
+export const newsSlice = createSlice({
+  name : 'newsSlice',
+  initialState:{
+    isLoading: false,
+    clips:[],
+    articles:[],
+    searchHistory:[]
+  },
+  reducers:{
+    clip :(state, action)=>{
+      console.log('action.payload는 객체를 가져옴.',action.payload)
+      if(state.clips.some(item => item._id === action.payload._id)){
+        console.log('뺌')
+        state.clips = state.clips.filter(item => item._id !== action.payload._id
+        )
+      } else {
+        state.clips.push(action.payload)
+        console.log('넣었음!')
+      }
+    }
+  },
+  extraReducers:{
+    [getArticle.pending]: (state)=>{
+      state.isLoading = true
+    },
+    [getArticle.fulfilled]: (state, {payload})=>{
+      state.isLoading = false
+      state.articles = payload
+    },
+    [getArticle.rejected]: (state)=>{
+      state.isLoading = false
+    }
+
+  }
+})
+
+const store = configureStore({
+  reducer : {
+    news: newsSlice.reducer
+  },
+  applyMiddleware,
+
+})
 
 // const api = async (searchKeyword) => {
 //   setLoading(true);

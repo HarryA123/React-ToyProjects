@@ -1,15 +1,12 @@
 import { Link } from 'react-router-dom';
-import { useDispatch , useSelector  }from 'react-redux';
-import { newsSlice } from "../store/store";
+import { useSelector  }from 'react-redux';
+
 import Article from './Article';
 
 const Clip = () => {
-  const dispatch = useDispatch();
   const clips = useSelector(state=>state.news.clips)
-  console.log('clipped List: ',clips)
-  const clipBtn = ()=>{
-    dispatch(newsSlice.actions.clip())
-  }
+  console.log('clipped List: ',typeof(clips))
+
   return (
   <>
     <h1>📌My Clips📌</h1>

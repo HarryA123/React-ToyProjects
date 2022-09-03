@@ -41,6 +41,26 @@ export const newsSlice = createSlice({
         state.clips.push(action.payload)
         console.log('넣었음!')
       }
+    },
+    // 이미 있는 키워드를 받은 상황에서 전체 history가 5개 미만이면 그대로 push/ 그 이상 초과하면 마지막을 없애고, 새로운 keyword 그대로 push.
+    history: (state, action)=>{
+      if(state.searchHistory.length < 5){
+        state.searchHistory = state.searchHistory.filter(ele => ele !== action.payload)
+        state.searchHistory.push(action.payload)
+      }else{
+        state.searchHistory = state.searchHistory.filter(ele => ele !== action.payload)
+        state.searchHistory.push(action.payload)
+      }
+
+    },
+    historyUpdate: (state, action)=>{
+      if(state.searchHistory.length < 5 ){
+      state.searchHistory.push(action.payload)
+      }else{
+      state.searchHistory.push(action.payload)
+      state.searchHistory.shift()
+      }
+      // }
     }
   },
   extraReducers:{

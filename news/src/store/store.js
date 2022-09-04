@@ -7,6 +7,16 @@ import {
   createAsyncThunk,
 } from "@reduxjs/toolkit";
 import axios from "axios";
+// import { persistStore , persistReducer} from "redux-persist";
+// import storage from "redux-persist/lib/storage";
+
+// const persistConfig = {
+//   key: 'persist-key',
+//   storage
+// }
+
+// const persistReducer = persistReducer(persistConfig, newsSlice.reducer);
+
 
 export const getArticle = createAsyncThunk(
   "newsSlice/getArticle",
@@ -98,9 +108,7 @@ export const newsSlice = createSlice({
 });
 
 const store = configureStore({
-  reducer: {
-    news: newsSlice.reducer,
-  },
+  reducer: newsSlice.reducer,
   applyMiddleware,
 });
 

@@ -10,9 +10,9 @@ import { useInView } from "react-intersection-observer";
 const Main = () => {
   const [value, setValue] = useState("");
   const { ref, inView } = useInView();
-  const articles = useSelector((state) => state.news.articles);
-  const isLoading = useSelector((state) => state.news.isLoading);
-  const searchHistory = useSelector((state) => state.news.searchHistory);
+  const articles = useSelector((state) => state.articles);
+  const isLoading = useSelector((state) => state.isLoading);
+  const searchHistory = useSelector((state) => state.searchHistory);
   // const searchHistory = useSelector(state=>state.news.searchHistory);
   const dispatch = useDispatch();
   const timer = useRef(null)

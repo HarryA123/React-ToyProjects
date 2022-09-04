@@ -5,8 +5,8 @@ import { ClipIcon } from "./style";
 
 const Article = ({ ele }) => {
   const dispatch = useDispatch();
-  const clips = useSelector(state => state.news.clips)
-  console.log(clips)
+  const clips = useSelector(state => state.clips)
+  // console.log(clips)
   return (
     <>
       <ClipIcon onClick={() => {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Header, Logo, NavInput } from "./styles";
+import { Header, Logo, NavInput, SearchButton } from "./styles";
 
 const HeaderComponent = ({ onSubmit, onChange, movieSearch }) => {
   return (
@@ -12,6 +12,7 @@ const HeaderComponent = ({ onSubmit, onChange, movieSearch }) => {
           onChange={onChange}
           value={movieSearch}
         />
+        <SearchButton onClick={onSubmit}>검색</SearchButton>
       </form>
     </Header>
   );

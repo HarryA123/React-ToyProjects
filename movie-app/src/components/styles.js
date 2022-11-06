@@ -14,6 +14,11 @@ export const ListContainer = styled.div`
   margin: 80px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  @media (max-width: 768px) {
+    /* padding: 16px; */
+    /* min-width: 350px; */
+    margin: 80px 16px;
+  }
 `;
 
 export const Container = styled.div`
@@ -68,6 +73,10 @@ export const Header = styled.div`
   padding: 100px;
   justify-content: space-between;
   padding: 0 80px;
+  @media (max-width: 768px) {
+    padding: 16px;
+    min-width: 350px;
+  }
 `;
 
 export const Logo = styled(Link)`
@@ -133,6 +142,9 @@ export const DetailColumn = styled.div`
   flex-direction: column;
   padding: 0 20px;
   justify-content: space-between;
+  @media (max-width: 768px) {
+    padding: 0;
+  }
 `;
 
 export const SearchButton = styled.span`
@@ -143,4 +155,7 @@ export const SearchButton = styled.span`
   cursor: pointer;
   background-color: red;
   padding: 5px;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;

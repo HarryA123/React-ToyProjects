@@ -88,24 +88,21 @@ export const Logo = styled(Link)`
 `;
 
 export const NavInput = styled.input`
-  box-shadow: "none";
-  margin-top: "80px";
-  color: "white";
-  padding: "0.5em";
-  border: "1px solid white";
-  width: "200px";
-  text-align: "center";
-  background-color: "black";
-  display: "block";
-  margin: "4em auto";
+  border: none;
+  padding: 4px;
+  ::placeholder {
+    font-size: 12px;
+  }
 `;
-
 
 export const DetailContainer = styled.div`
   color: white;
   margin: 80px;
   font-size: 12px;
-  width: 800px;
+  @media (max-width: 768px) {
+    margin: 80px 16px;
+  }
+  /* width: 800px; */
 `;
 
 export const DetailTitle = styled.div`
@@ -115,12 +112,20 @@ export const DetailTitle = styled.div`
   margin-bottom: 10px;
 `;
 export const DetailImage = styled.img`
-  /* width: 200px; */
   height: 200px;
+  @media (max-width: 768px) {
+    height: 200ps;
+    width: 133px;
+    margin: 0 auto 30px;
+  }
 `;
 
 export const DetailRow = styled.div`
   display: flex;
+  min-width: 300px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export const DetailColumn = styled.div`
@@ -128,4 +133,14 @@ export const DetailColumn = styled.div`
   flex-direction: column;
   padding: 0 20px;
   justify-content: space-between;
+`;
+
+export const SearchButton = styled.span`
+  color: white;
+  font-size: 12px;
+  margin-left: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: red;
+  padding: 5px;
 `;

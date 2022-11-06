@@ -11,23 +11,23 @@ function Movie({
   genres,
 }) {
   return (
-    <Link to={`/Movie/${id}`}>
-      <Container>
-        <FlexRow>
+    <Container>
+      <FlexRow>
+        <Link to={`/Movie/${id}`}>
           <Poster src={medium_cover_image} alt={title} />
-          <FlexColumn>
-            <Title>
-              {title} ({year})
-            </Title>
-            <Info>
-              Rating : {rating} <br /> RunTime : {(runtime / 60).toFixed(1)}h
-              <br />
-              Genres: {genres ? genres[0] : null}
-            </Info>
-          </FlexColumn>
-        </FlexRow>
-      </Container>
-    </Link>
+        </Link>
+        <FlexColumn>
+          <Title>
+            {title} ({year})
+          </Title>
+          <Info>
+            Rating : {rating} <br /> RunTime : {(runtime / 60).toFixed(1)}h
+            <br />
+            Genres: {genres ? genres[0] : null}
+          </Info>
+        </FlexColumn>
+      </FlexRow>
+    </Container>
   );
 }
 

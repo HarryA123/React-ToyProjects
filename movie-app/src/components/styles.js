@@ -15,8 +15,6 @@ export const ListContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   @media (max-width: 768px) {
-    /* padding: 16px; */
-    /* min-width: 350px; */
     margin: 80px 16px;
   }
 `;
@@ -26,7 +24,6 @@ export const Container = styled.div`
   padding: 10px;
   margin: 10px;
   background-color: black;
-
   :hover {
     background-color: #af1a1a;
     transform: scale(1.02);
@@ -34,7 +31,6 @@ export const Container = styled.div`
   }
 `;
 export const Title = styled.p`
-  text-decoration-line: none;
   color: white;
   font-weight: 700;
   margin: 0;
@@ -73,6 +69,7 @@ export const Header = styled.div`
   padding: 100px;
   justify-content: space-between;
   padding: 0 80px;
+  z-index: 1;
   @media (max-width: 768px) {
     padding: 16px;
     min-width: 350px;
@@ -111,7 +108,6 @@ export const DetailContainer = styled.div`
   @media (max-width: 768px) {
     margin: 80px 16px;
   }
-  /* width: 800px; */
 `;
 
 export const DetailTitle = styled.div`

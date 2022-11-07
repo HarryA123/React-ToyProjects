@@ -101,6 +101,19 @@ export const NavInput = styled.input`
   }
 `;
 
+export const SearchButton = styled.span`
+  color: white;
+  font-size: 12px;
+  margin-left: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: red;
+  padding: 5px;
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
 export const DetailContainer = styled.div`
   color: white;
   margin: 80px;
@@ -140,18 +153,5 @@ export const DetailColumn = styled.div`
   justify-content: space-between;
   @media (max-width: 768px) {
     padding: 0;
-  }
-`;
-
-export const SearchButton = styled.span`
-  color: white;
-  font-size: 12px;
-  margin-left: 6px;
-  font-weight: bold;
-  cursor: pointer;
-  background-color: red;
-  padding: 5px;
-  @media (max-width: 768px) {
-    display: none;
   }
 `;

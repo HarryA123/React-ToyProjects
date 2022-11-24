@@ -13,13 +13,15 @@ function Movie({
   runtime,
   genres,
 }) {
-  const state = useSelector(state => state.reducer.clips);
+  const clips = useSelector(state => state.reducer.clips);
+  // console.log(clips.map(item=> item.title));
   const dispatch = useDispatch();
   const getClip = () => {
-    dispatch({ type: "clip/clip", title });
-    // dispatch(movieSlice.actions.clip(title));
+    dispatch({
+      type: "clip/clip",
+      info: { id, title, year, medium_cover_image, rating, runtime, genres },
+    });
   };
-  console.log(state);
 
   return (
     <Container>
@@ -31,7 +33,9 @@ function Movie({
           <Title>
             {title} ({year})
           </Title>
-          <div onClick={getClip}>{state.includes(title) ? "💜" : "🤍"}</div>
+          <div onClick={getClip}>
+            {clips.map(item=> item.title).includes(title) ? "💜" : "🤍"}
+          </div>
           <Info>
             Rating : {rating} <br /> RunTime : {(runtime / 60).toFixed(1)}h
             <br />

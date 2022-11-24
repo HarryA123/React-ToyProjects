@@ -1,6 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { Header, Logo, NavInput, SearchButton, SearchForm } from "./styles";
+import {
+  Header,
+  Logo,
+  NavInput,
+  SearchButton,
+  Clips,
+  SearchForm,
+} from "./styles";
 
 const HeaderComponent = ({ onSubmit, onChange, movieSearch }) => {
   const param = useParams();
@@ -8,15 +16,18 @@ const HeaderComponent = ({ onSubmit, onChange, movieSearch }) => {
     <Header>
       <Logo to={"/"}>MOVIt</Logo>
       {typeof param.id === "string" ? null : (
-        <form onSubmit={onSubmit}>
-          <NavInput
-            placeholder="Search..."
-            type="text"
-            onChange={onChange}
-            value={movieSearch}
-          />
-          <SearchButton onClick={onSubmit}>검색</SearchButton>
-        </form>
+        <>
+          <Clips to={"/Clip"}>나의 🤍</Clips>
+          <form onSubmit={onSubmit}>
+            <NavInput
+              placeholder="Search..."
+              type="text"
+              onChange={onChange}
+              value={movieSearch}
+            />
+            <SearchButton onClick={onSubmit}>검색</SearchButton>
+          </form>
+        </>
       )}
     </Header>
   );

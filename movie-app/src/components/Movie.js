@@ -1,8 +1,6 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Container, Title, Poster, FlexColumn, Info, FlexRow } from "./styles";
-import movieSlice from "../features/movieSlice";
 
 function Movie({
   id,
@@ -14,7 +12,6 @@ function Movie({
   genres,
 }) {
   const clips = useSelector(state => state.reducer.clips);
-  // console.log(clips.map(item=> item.title));
   const dispatch = useDispatch();
   const getClip = () => {
     dispatch({
@@ -34,7 +31,7 @@ function Movie({
             {title} ({year})
           </Title>
           <div onClick={getClip}>
-            {clips.map(item=> item.title).includes(title) ? "💜" : "🤍"}
+            {clips.map(item => item.title).includes(title) ? "💜" : "🤍"}
           </div>
           <Info>
             Rating : {rating} <br /> RunTime : {(runtime / 60).toFixed(1)}h

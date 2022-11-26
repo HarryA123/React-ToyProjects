@@ -10,6 +10,15 @@ export const LoadingStyle = styled.div`
   font-size: 24px;
 `;
 
+export const FindError = styled.div`
+  width: 150px;
+  margin: 200px auto 0;
+  /* margin-top: 100px; */
+  text-align: center;
+  color: red;
+  font-size: 12px;
+`;
+
 export const ListContainer = styled.div`
   margin: 80px;
   display: grid;
@@ -91,6 +100,14 @@ export const Logo = styled(Link)`
   &:active {
     text-decoration: none;
   }
+`;
+
+export const Clips = styled(Link)`
+  margin-left: auto;
+  color: white;
+  text-decoration: none;
+  font-size: 12px;
+  margin-right: 10px;
 `;
 
 export const NavInput = styled.input`

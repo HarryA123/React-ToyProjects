@@ -1,58 +1,46 @@
 import { useInView } from "react-intersection-observer";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { LoadingStyle, FindError, ListContainer } from "../components/styles";
 import Movie from "../components/Movie";
 import HeaderComponent from "../components/HomeButton";
 import GlobalStyle from "../GlobalStyle";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { LoadingStyle, FindError, ListContainer } from "../components/styles";
+import { useSelector, useDispatch } from "react-redux";
+import { callMovies } from "../features/movieSlice";
 
 function Home() {
-  const [loading, setLoading] = useState(true);
-  const [movies, setMovies] = useState([]);
   const [movieSearch, setMovieSearch] = useState("");
   const [movieName, setMovieName] = useState("");
-  const [pageNumber, setPageNumber] = useState(1);
+  // const [pageNumber, setPageNumber] = useState(1);
+  const currentPageNumber = useRef(1);
   const { ref, inView, entry } = useInView({
     threshold: 0,
   });
-  // console.log(ref, inView, entry);
-  // console.log(movies);
-  const param = useParams();
-  console.log("param:", param);
-  console.log(movieName);
-  console.log("🌭검색결과들...", movies);
-  const getMovies = async () => {
-    const json = await (
-      await fetch(
-        `https://yts.mx/api/v2/list_movies.json?minimum_rating=1&page=${pageNumber}&query_term=${movieName}&sort_by=year`
-      )
-    ).json();
-    setMovies(json.data.movies);
-    setLoading(false);
-  };
+  const { isLoading, movies } = useSelector(state => state.reducer);
+  const dispatch = useDispatch();
 
   const onChange = event => {
     setMovieSearch(event.target.value);
   };
-
   const onSubmit = event => {
     event.preventDefault();
-    if (movieName.trim() === "") {
+    if (movieSearch.trim() === "") {
       alert("키워드를 입력하세요");
     } else {
       setMovieName(movieSearch);
-      getMovies();
+      dispatch(
+        callMovies({ movieName: movieName, pageNumber: currentPageNumber })
+      );
     }
   };
-  const clips = useSelector(state => state.reducer.clips);
-  console.log(clips);
 
-  // When User Searching...
+  // 1. thunk를 사용한 api 관리
   useEffect(() => {
-    getMovies();
+    dispatch(
+      callMovies({ movieName: movieName, pageNumber: currentPageNumber })
+    );
   }, [movieName]);
 
+  // console.log(movieSearch, movieName, pageNumber, movies);
   // if (inView === true) {
   //   setPageNumber(prev => prev + 1);
   //   setMovies(prev => {
@@ -79,7 +67,7 @@ function Home() {
         onChange={onChange}
         movieSearch={movieSearch}
       />
-      {loading ? (
+      {isLoading ? (
         <LoadingStyle>Loading...</LoadingStyle>
       ) : (
         <>

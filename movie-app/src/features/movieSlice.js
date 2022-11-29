@@ -1,26 +1,49 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
-const initialState = {
-  clips: [],
-};
+const callMovies = createAsyncThunk(
+  "movieSlice/callMovies",
+  async ({ movieName, pageNumber }) => {
+    const response = await axios.get(
+      `https://yts.mx/api/v2/list_movies.json?minimum_rating=1&page=${pageNumber}&query_term=${movieName}&sort_by=year`
+    );
+    return response.data.data.movies;
+  }
+);
 
 export const movieSlice = createSlice({
-  name: "clip",
-  initialState,
+  name: "film",
+  initialState: {
+    clips: [],
+    movies: [],
+    isLoading: true,
+  },
   reducers: {
     clip: (state, action) => {
       if (state.clips.some(item => item.title === action.info.title)) {
         state.clips = state.clips.filter(
           item => item.title !== action.info.title
         );
-        console.log("💦뺐음!");
       } else {
         state.clips.push(action.info);
       }
     },
   },
+
+  extraReducers: builder => {
+    builder.addCase(callMovies.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(callMovies.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.movies = action.payload;
+    });
+    builder.addCase(callMovies.rejected, state => {
+      state.isLoading = false;
+    });
+  },
 });
 
-export const { clip } = movieSlice.actions;
-
 export default movieSlice;
+export const { clip } = movieSlice.actions;
+export { callMovies };

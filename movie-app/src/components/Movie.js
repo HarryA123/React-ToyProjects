@@ -15,7 +15,7 @@ function Movie({
   const dispatch = useDispatch();
   const getClip = () => {
     dispatch({
-      type: "clip/clip",
+      type: "film/clip",
       info: { id, title, year, medium_cover_image, rating, runtime, genres },
     });
   };

@@ -15,7 +15,7 @@ const HeaderComponent = ({ onSubmit, onChange, movieSearch }) => {
   return (
     <Header>
       <Logo to={"/"}>MOVIt</Logo>
-      {typeof param.id === "string" ? null : (
+      {typeof param.id === "string" || window.location.pathname === '/Clip' ? null : (
         <>
           <Clips to={"/Clip"}>나의 🤍</Clips>
           <form onSubmit={onSubmit}>

@@ -28,6 +28,15 @@ export const ListContainer = styled.div`
   }
 `;
 
+export const ClipListContainer = styled.div`
+  margin: 0 80px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  @media (max-width: 768px) {
+    margin: 80px 16px;
+  }
+`;
+
 export const Container = styled.div`
   cursor: pointer;
   padding: 10px;
@@ -39,6 +48,12 @@ export const Container = styled.div`
     transition: all 0.2s ease-out;
   }
 `;
+
+export const PageTitle = styled.h3`
+  color: white;
+  margin: 60px 90px 20px;
+`;
+
 export const Title = styled.p`
   color: white;
   font-weight: 700;

@@ -10,13 +10,12 @@ import { callMovies } from "../features/movieSlice";
 function Home() {
   const [movieSearch, setMovieSearch] = useState("");
   const [movieName, setMovieName] = useState("");
-  // const [pageNumber, setPageNumber] = useState(1);
   const currentPageNumber = useRef(1);
-  const { ref, inView, entry } = useInView({
-    threshold: 0,
-  });
+  const { ref, inView } = useInView();
   const { isLoading, movies } = useSelector(state => state.reducer);
   const dispatch = useDispatch();
+
+  console.log("🧡", inView);
 
   const onChange = event => {
     setMovieSearch(event.target.value);
@@ -40,24 +39,17 @@ function Home() {
     );
   }, [movieName]);
 
-  // console.log(movieSearch, movieName, pageNumber, movies);
-  // if (inView === true) {
-  //   setPageNumber(prev => prev + 1);
-  //   setMovies(prev => {
-  //     return prev.concat(movies);
-  //   });
-  //   getMovies();
-  // } else {
-
-  // }
-  // When User Scroll, Keep Adding Movies at the bottom...
-  // useEffect(() => {
-  //   setPageNumber(prev => prev + 1);
-  //   setMovies(prev => {
-  //     return prev.concat(movies);
-  //   });
-  //   getMovies();
-  // }, [inView]);
+  useEffect(() => {
+    if (movies.length !== 0 && inView) {
+      currentPageNumber.current = currentPageNumber.current + 1;
+      dispatch(
+        callMovies({
+          movieName: movieName,
+          pageNumber: currentPageNumber.current,
+        })
+      );
+    }
+  }, [inView]);
 
   return (
     <>
@@ -102,8 +94,13 @@ function Home() {
               이 영화를 찾을 수 없습니다
             </FindError>
           )}
-          {inView ? <>🎭</> : <>🧶</>}
-          <div ref={ref} style={{ width: "100%", height: "20px" }}></div>
+          <div
+            ref={ref}
+            style={{
+              width: "100%",
+              height: "20px",
+              backgroundColor: "red",
+            }}></div>
         </>
       )}
     </>

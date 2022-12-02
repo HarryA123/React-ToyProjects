@@ -34,9 +34,9 @@ export const movieSlice = createSlice({
     builder.addCase(callMovies.pending, state => {
       state.isLoading = true;
     });
-    builder.addCase(callMovies.fulfilled, (state, action) => {
+    builder.addCase(callMovies.fulfilled, (state, { payload }) => {
       state.isLoading = false;
-      state.movies = action.payload;
+      payload.map(item => state.movies.push(item));
     });
     builder.addCase(callMovies.rejected, state => {
       state.isLoading = false;

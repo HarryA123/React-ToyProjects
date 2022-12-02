@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Keyframes } from "styled-components";
 
 export const LoadingStyle = styled.div`
   display: flex;
@@ -8,6 +9,32 @@ export const LoadingStyle = styled.div`
   margin-top: 300px;
   color: red;
   font-size: 24px;
+`;
+
+export const Spinner = styled.span`
+  width: 8px;
+  height: 8px;
+  display: block;
+  margin: 4px auto 40px;
+  position: relative;
+  background: #fff;
+  box-shadow: -18px 0 #fff, 18px 0 #fff;
+  box-sizing: border-box;
+  animation: shadowPulse 2s linear infinite;
+  @keyframes shadowPulse {
+    33% {
+      background: #fff;
+      box-shadow: -18px 0 #af1a1a, 18px 0 #fff;
+    }
+    66% {
+      background: #af1a1a;
+      box-shadow: -18px 0 #fff, 18px 0 #fff;
+    }
+    100% {
+      background: #fff;
+      box-shadow: -18px 0 #fff, 18px 0 #af1a1a;
+    }
+  }
 `;
 
 export const FindError = styled.div`
@@ -20,11 +47,11 @@ export const FindError = styled.div`
 `;
 
 export const ListContainer = styled.div`
-  margin: 80px;
+  margin: 80px 80px 20px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   @media (max-width: 768px) {
-    margin: 80px 16px;
+    margin: 80px 16px 20px;
   }
 `;
 

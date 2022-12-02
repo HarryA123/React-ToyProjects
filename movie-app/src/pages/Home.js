@@ -1,6 +1,6 @@
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState, useRef } from "react";
-import { LoadingStyle, FindError, ListContainer } from "../components/styles";
+import { Spinner, FindError, ListContainer } from "../components/styles";
 import Movie from "../components/Movie";
 import HeaderComponent from "../components/HomeButton";
 import GlobalStyle from "../GlobalStyle";
@@ -12,14 +12,13 @@ function Home() {
   const [movieName, setMovieName] = useState("");
   const currentPageNumber = useRef(1);
   const { ref, inView } = useInView();
-  const { isLoading, movies } = useSelector(state => state.reducer);
+  const { movies } = useSelector(state => state.reducer);
   const dispatch = useDispatch();
-
-  console.log("🧡", inView);
 
   const onChange = event => {
     setMovieSearch(event.target.value);
   };
+
   const onSubmit = event => {
     event.preventDefault();
     if (movieSearch.trim() === "") {
@@ -59,50 +58,40 @@ function Home() {
         onChange={onChange}
         movieSearch={movieSearch}
       />
-      {isLoading ? (
-        <LoadingStyle>Loading...</LoadingStyle>
-      ) : (
-        <>
-          {movies ? (
-            <ListContainer>
-              {movies.map(item => {
-                return (
-                  <Movie
-                    key={item.title}
-                    id={item.id}
-                    title={item.title}
-                    year={item.year}
-                    medium_cover_image={item.medium_cover_image}
-                    rating={item.rating}
-                    runtime={item.runtime}
-                    genres={item.genres}
-                    summary={item.summary}
-                  />
-                );
-              })}
-            </ListContainer>
-          ) : (
-            <FindError>
-              <h4
-                style={{
-                  textOverflow: "ellipsis",
-                  overflow: "hidden",
-                  whiteSpace: "nowrap",
-                }}>
-                {movieName}
-              </h4>
-              이 영화를 찾을 수 없습니다
-            </FindError>
-          )}
-          <div
-            ref={ref}
-            style={{
-              width: "100%",
-              height: "20px",
-              backgroundColor: "red",
-            }}></div>
-        </>
-      )}
+      <>
+        {movies ? (
+          <ListContainer>
+            {movies.map((item, idx) => {
+              return (
+                <Movie
+                  key={idx}
+                  id={item.title}
+                  title={item.title}
+                  year={item.year}
+                  medium_cover_image={item.medium_cover_image}
+                  rating={item.rating}
+                  runtime={item.runtime}
+                  genres={item.genres}
+                  summary={item.summary}
+                />
+              );
+            })}
+          </ListContainer>
+        ) : (
+          <FindError>
+            <h4
+              style={{
+                textOverflow: "ellipsis",
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+              }}>
+              {movieName}
+            </h4>
+            이 영화를 찾을 수 없습니다
+          </FindError>
+        )}
+        <Spinner ref={ref} class="loader" />
+      </>
     </>
   );
 }

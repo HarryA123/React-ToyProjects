@@ -18,6 +18,7 @@ function Home() {
   const currentPageNumber = useRef(1);
   const { ref, inView } = useInView();
   const { movies } = useSelector(state => state.reducer);
+  const {isLoading} = useSelector(state => state.reducer);
   const dispatch = useDispatch();
 
   const onChange = event => {
@@ -106,7 +107,7 @@ function Home() {
             이 영화를 찾을 수 없습니다
           </FindError>
         )}
-        {movies.length < 20 ? (
+        {(movies.length < 20 && isLoading === false) ? (
           <LastPage>- 마지막 페이지 입니다 -</LastPage>
         ) : (
           <Spinner ref={ref} className="loader" />

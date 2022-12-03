@@ -16,10 +16,15 @@ import {
 
 function Detail() {
   const { id } = useParams();
-  const { detail } = useSelector(state => state.reducer);
-  const { isLoading } = useSelector(state => state.reducer);
+  const { detail, isLoading, clips } = useSelector(state => state.reducer);
   const dispatch = useDispatch();
-  console.log(detail);
+
+  const getClip = () => {
+    dispatch({
+      type: "film/clip",
+      info: detail,
+    });
+  };
 
   useEffect(() => {
     dispatch(callMovieDetail({ id: id }));
@@ -37,7 +42,14 @@ function Detail() {
             <DetailImage src={detail.medium_cover_image} alt={detail.title} />
             <DetailColumn>
               <div>
-                <DetailTitle>{detail.title_long}</DetailTitle>
+                <DetailTitle>
+                  {detail.title_long}
+                  <span onClick={getClip} style={{ cursor: "pointer" }}>
+                    {clips.map(item => item.title).includes(detail.title)
+                      ? "🧡"
+                      : "🤍"}
+                  </span>
+                </DetailTitle>
                 <Info>
                   Rating : {Math.round(detail.rating / 2)}
                   <br />

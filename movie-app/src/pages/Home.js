@@ -10,17 +10,16 @@ import Movie from "../components/Movie";
 import HeaderComponent from "../components/HomeButton";
 import GlobalStyle from "../GlobalStyle";
 import { useSelector, useDispatch } from "react-redux";
-import movieSlice, { callMovies } from "../features/movieSlice";
+import { callMovies } from "../features/movieSlice";
 
 function Home() {
   const [movieSearch, setMovieSearch] = useState("");
   const [movieName, setMovieName] = useState("");
   const currentPageNumber = useRef(1);
   const { ref, inView } = useInView();
-  const { movies } = useSelector(state => state.reducer);
-  const {isLoading} = useSelector(state => state.reducer);
+  const { movies, isLoading, clips } = useSelector(state => state.reducer);
   const dispatch = useDispatch();
-
+  
   const onChange = event => {
     setMovieSearch(event.target.value);
   };
@@ -107,7 +106,7 @@ function Home() {
             이 영화를 찾을 수 없습니다
           </FindError>
         )}
-        {(movies.length < 20 && isLoading === false) ? (
+        {movies.length < 20 && isLoading === false ? (
           <LastPage>- 마지막 페이지 입니다 -</LastPage>
         ) : (
           <Spinner ref={ref} className="loader" />

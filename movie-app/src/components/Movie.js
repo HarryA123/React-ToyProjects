@@ -31,7 +31,7 @@ function Movie({
             {title} ({year})
           </Title>
           <div onClick={getClip}>
-            {clips.map(item => item.title).includes(title) ? "💜" : "🤍"}
+            {clips.map(item => item.title).includes(title) ? "🧡" : "🤍"}
           </div>
           <Info>
             Rating : {rating} <br /> RunTime : {(runtime / 60).toFixed(1)}h

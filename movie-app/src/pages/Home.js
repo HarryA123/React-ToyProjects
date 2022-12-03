@@ -1,6 +1,11 @@
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState, useRef } from "react";
-import { Spinner, FindError, ListContainer } from "../components/styles";
+import {
+  Spinner,
+  FindError,
+  LastPage,
+  ListContainer,
+} from "../components/styles";
 import Movie from "../components/Movie";
 import HeaderComponent from "../components/HomeButton";
 import GlobalStyle from "../GlobalStyle";
@@ -18,11 +23,14 @@ function Home() {
   const onChange = event => {
     setMovieSearch(event.target.value);
   };
+
   const onSubmit = event => {
     event.preventDefault();
     if (movieSearch.trim() === "") {
       alert("키워드를 입력하세요");
     } else {
+      currentPageNumber.current = 1;
+      window.scrollTo(0, 0);
       setMovieName(movieSearch);
       dispatch(
         callMovies({
@@ -33,7 +41,6 @@ function Home() {
     }
   };
 
-  // 1. thunk를 사용한 api 관리
   useEffect(() => {
     dispatch(
       callMovies({
@@ -99,7 +106,11 @@ function Home() {
             이 영화를 찾을 수 없습니다
           </FindError>
         )}
-        <Spinner ref={ref} className="loader" />
+        {movies.length < 20 ? (
+          <LastPage>- 마지막 페이지 입니다 -</LastPage>
+        ) : (
+          <Spinner ref={ref} className="loader" />
+        )}
       </>
     </>
   );

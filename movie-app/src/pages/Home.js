@@ -17,9 +17,10 @@ function Home() {
   const [movieName, setMovieName] = useState("");
   const currentPageNumber = useRef(1);
   const { ref, inView } = useInView();
-  const { movies, isLoading, clips } = useSelector(state => state.reducer);
+  const { movies, isLoading, success } = useSelector(state => state.reducer);
   const dispatch = useDispatch();
-  
+
+  console.log(success);
   const onChange = event => {
     setMovieSearch(event.target.value);
   };
@@ -75,24 +76,31 @@ function Home() {
         movieName={movieName}
       />
       <>
-        {movies ? (
-          <ListContainer>
-            {movies.map((item, idx) => {
-              return (
-                <Movie
-                  key={idx}
-                  id={item.id}
-                  title={item.title}
-                  year={item.year}
-                  medium_cover_image={item.medium_cover_image}
-                  rating={item.rating}
-                  runtime={item.runtime}
-                  genres={item.genres}
-                  summary={item.summary}
-                />
-              );
-            })}
-          </ListContainer>
+        {success ? (
+          <>
+            <ListContainer>
+              {movies.map((item, idx) => {
+                return (
+                  <Movie
+                    key={idx}
+                    id={item.id}
+                    title={item.title}
+                    year={item.year}
+                    medium_cover_image={item.medium_cover_image}
+                    rating={item.rating}
+                    runtime={item.runtime}
+                    genres={item.genres}
+                    summary={item.summary}
+                  />
+                );
+              })}
+            </ListContainer>
+            {movies.length < 20 && isLoading === false ? (
+              <LastPage>- 마지막 페이지 입니다 -</LastPage>
+            ) : (
+              <Spinner ref={ref} className="loader" />
+            )}
+          </>
         ) : (
           <FindError>
             <h4
@@ -105,11 +113,6 @@ function Home() {
             </h4>
             이 영화를 찾을 수 없습니다
           </FindError>
-        )}
-        {movies.length < 20 && isLoading === false ? (
-          <LastPage>- 마지막 페이지 입니다 -</LastPage>
-        ) : (
-          <Spinner ref={ref} className="loader" />
         )}
       </>
     </>

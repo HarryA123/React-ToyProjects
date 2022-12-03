@@ -10,7 +10,7 @@ const callMovies = createAsyncThunk(
     try {
       return response.data.data.movies;
     } catch (err) {
-      console.log("에러 발생");
+      alert("에러 발생");
     }
   }
 );
@@ -24,7 +24,7 @@ const callMovieDetail = createAsyncThunk(
     try {
       return response.data.data.movie;
     } catch (err) {
-      console.log("에러 발생");
+      alert("에러 발생");
     }
   }
 );
@@ -36,6 +36,7 @@ export const movieSlice = createSlice({
     movies: [],
     detail: [],
     isLoading: true,
+    success: true,
   },
   reducers: {
     clip: (state, action) => {
@@ -44,7 +45,6 @@ export const movieSlice = createSlice({
           item => item.title !== action.info.title
         );
       } else {
-        console.log(action);
         state.clips.push(action.info);
       }
     },
@@ -55,9 +55,22 @@ export const movieSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(callMovies.fulfilled, (state, action) => {
-      state.isLoading = false;
       action.meta.arg.pageNumber === 1 && (state.movies = []);
-      action.payload.map(item => state.movies.push(item));
+      if (action.payload === undefined) {
+        state.success = false;
+      } else {
+        state.success = true;
+        action.payload.map(item => state.movies.push(item));
+      }
+      state.isLoading = false;
+      //
+      // if (state.clips.some(item => item.title === action.info.title)) {
+      //   state.clips = state.clips.filter(
+      //     item => item.title !== action.info.title
+      //   );
+      // } else {
+      //   state.clips.push(action.info);
+      // }
     });
     builder.addCase(callMovies.rejected, state => {
       state.isLoading = false;
@@ -66,8 +79,8 @@ export const movieSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(callMovieDetail.fulfilled, (state, action) => {
-      state.isLoading = false;
       state.detail = action.payload;
+      state.isLoading = false;
     });
   },
 });

@@ -5,7 +5,7 @@ import Movie from "../components/Movie";
 import HeaderComponent from "../components/HomeButton";
 import GlobalStyle from "../GlobalStyle";
 import { useSelector, useDispatch } from "react-redux";
-import { callMovies } from "../features/movieSlice";
+import movieSlice, { callMovies } from "../features/movieSlice";
 
 function Home() {
   const [movieSearch, setMovieSearch] = useState("");
@@ -18,7 +18,6 @@ function Home() {
   const onChange = event => {
     setMovieSearch(event.target.value);
   };
-
   const onSubmit = event => {
     event.preventDefault();
     if (movieSearch.trim() === "") {
@@ -26,7 +25,10 @@ function Home() {
     } else {
       setMovieName(movieSearch);
       dispatch(
-        callMovies({ movieName: movieName, pageNumber: currentPageNumber })
+        callMovies({
+          movieName: movieName,
+          pageNumber: currentPageNumber.current,
+        })
       );
     }
   };
@@ -34,7 +36,10 @@ function Home() {
   // 1. thunk를 사용한 api 관리
   useEffect(() => {
     dispatch(
-      callMovies({ movieName: movieName, pageNumber: currentPageNumber })
+      callMovies({
+        movieName: movieName,
+        pageNumber: currentPageNumber.current,
+      })
     );
   }, [movieName]);
 
@@ -57,6 +62,10 @@ function Home() {
         onSubmit={onSubmit}
         onChange={onChange}
         movieSearch={movieSearch}
+        setMovieName={setMovieName}
+        setMovieSearch={setMovieSearch}
+        currentPageNumber={currentPageNumber}
+        movieName={movieName}
       />
       <>
         {movies ? (
@@ -90,7 +99,7 @@ function Home() {
             이 영화를 찾을 수 없습니다
           </FindError>
         )}
-        <Spinner ref={ref} class="loader" />
+        <Spinner ref={ref} className="loader" />
       </>
     </>
   );

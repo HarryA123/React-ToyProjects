@@ -81,7 +81,7 @@ function Home() {
               return (
                 <Movie
                   key={idx}
-                  id={item.title}
+                  id={item.id}
                   title={item.title}
                   year={item.year}
                   medium_cover_image={item.medium_cover_image}

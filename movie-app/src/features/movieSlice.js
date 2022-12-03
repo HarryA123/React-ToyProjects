@@ -7,7 +7,25 @@ const callMovies = createAsyncThunk(
     const response = await axios.get(
       `https://yts.mx/api/v2/list_movies.json?minimum_rating=1&page=${pageNumber}&query_term=${movieName}&sort_by=year`
     );
-    return response.data.data.movies;
+    try {
+      return response.data.data.movies;
+    } catch (err) {
+      console.log("에러 발생");
+    }
+  }
+);
+
+const callMovieDetail = createAsyncThunk(
+  "movieSlice/callMovieDetail",
+  async ({ id }) => {
+    const response = await axios.get(
+      `https://yts.mx/api/v2/movie_details.json?movie_id=${id}`
+    );
+    try {
+      return response.data.data.movie;
+    } catch (err) {
+      console.log("에러 발생");
+    }
   }
 );
 
@@ -16,6 +34,7 @@ export const movieSlice = createSlice({
   initialState: {
     clips: [],
     movies: [],
+    detail: [],
     isLoading: true,
   },
   reducers: {
@@ -25,6 +44,7 @@ export const movieSlice = createSlice({
           item => item.title !== action.info.title
         );
       } else {
+        console.log(action);
         state.clips.push(action.info);
       }
     },
@@ -42,9 +62,16 @@ export const movieSlice = createSlice({
     builder.addCase(callMovies.rejected, state => {
       state.isLoading = false;
     });
+    builder.addCase(callMovieDetail.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(callMovieDetail.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.detail = action.payload;
+    });
   },
 });
 
 export default movieSlice;
 export const { clip } = movieSlice.actions;
-export { callMovies };
+export { callMovies, callMovieDetail };

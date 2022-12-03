@@ -1,42 +1,38 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import GlobalStyle from "../GlobalStyle";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { callMovieDetail } from "../features/movieSlice";
 import HeaderComponent from "../components/HomeButton";
 import {
-  LoadingStyle,
   Info,
   DetailContainer,
   DetailTitle,
   DetailImage,
   DetailRow,
   DetailColumn,
+  Spinner,
 } from "../components/styles";
 
 function Detail() {
   const { id } = useParams();
-  const [detail, setDetail] = useState("");
-  const [loading, setLoading] = useState(true);
-
-  const getDetail = async () => {
-    const json = await (
-      await fetch(`https://yts.mx/api/v2/movie_details.json?movie_id=${id}`)
-    ).json();
-    setDetail(json.data.movie);
-    setLoading(false);
-  };
+  const { detail } = useSelector(state => state.reducer);
+  const { isLoading } = useSelector(state => state.reducer);
+  const dispatch = useDispatch();
+  console.log(detail);
 
   useEffect(() => {
-    getDetail();
+    dispatch(callMovieDetail({ id: id }));
   }, []);
 
   return (
     <>
       <GlobalStyle />
       <HeaderComponent />
-      {loading ? (
-        <LoadingStyle>Loading...</LoadingStyle>
-      ) : (
-        <DetailContainer>
+      <DetailContainer>
+        {isLoading ? (
+          <Spinner className="loader" />
+        ) : (
           <DetailRow>
             <DetailImage src={detail.medium_cover_image} alt={detail.title} />
             <DetailColumn>
@@ -59,8 +55,8 @@ function Detail() {
               </div>
             </DetailColumn>
           </DetailRow>
-        </DetailContainer>
-      )}
+        )}
+      </DetailContainer>
     </>
   );
 }

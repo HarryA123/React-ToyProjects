@@ -1,21 +1,25 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+
 import {
   Header,
   Logo,
   NavInput,
   SearchButton,
   Clips,
-  SearchForm,
 } from "./styles";
 
-const HeaderComponent = ({ onSubmit, onChange, movieSearch }) => {
+const HeaderComponent = ({
+  onSubmit,
+  onChange,
+  movieSearch,
+}) => {
   const param = useParams();
   return (
     <Header>
       <Logo to={"/"}>MOVIt</Logo>
-      {typeof param.id === "string" || window.location.pathname === '/Clip' ? null : (
+      {typeof param.id === "string" ||
+      window.location.pathname === "/Clip" ? null : (
         <>
           <Clips to={"/Clip"}>나의 🤍</Clips>
           <form onSubmit={onSubmit}>

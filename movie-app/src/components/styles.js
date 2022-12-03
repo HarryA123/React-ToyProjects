@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { Keyframes } from "styled-components";
 
 export const LoadingStyle = styled.div`
   display: flex;
@@ -37,10 +36,18 @@ export const Spinner = styled.span`
   }
 `;
 
+export const LastPage = styled.div`
+  color: white;
+  width: 200px;
+  text-align: center;
+  margin: auto;
+  font-size: 10px;
+  margin-bottom: 20px;
+`;
+
 export const FindError = styled.div`
   width: 150px;
   margin: 200px auto 0;
-  /* margin-top: 100px; */
   text-align: center;
   color: red;
   font-size: 12px;

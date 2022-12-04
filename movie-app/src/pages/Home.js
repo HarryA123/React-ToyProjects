@@ -20,7 +20,6 @@ function Home() {
   const { movies, isLoading, success } = useSelector(state => state.reducer);
   const dispatch = useDispatch();
 
-  console.log(success);
   const onChange = event => {
     setMovieSearch(event.target.value);
   };
@@ -42,26 +41,38 @@ function Home() {
     }
   };
 
+  // useEffect(() => {
+  //   dispatch(
+  //     callMovies({
+  //       movieName: movieName,
+  //       pageNumber: currentPageNumber.current,
+  //     })
+  //   );
+  // }, [movieName]);
+
+  // useEffect(() => {
+  //   if (movies.length !== 0 && inView) {
+  //     currentPageNumber.current = currentPageNumber.current + 1;
+  //     dispatch(
+  //       callMovies({
+  //         movieName: movieName,
+  //         pageNumber: currentPageNumber.current,
+  //       })
+  //     );
+  //   }
+  // }, [inView]);
+
   useEffect(() => {
+    movies.length !== 0 &&
+      inView &&
+      (currentPageNumber.current = currentPageNumber.current + 1);
     dispatch(
       callMovies({
         movieName: movieName,
         pageNumber: currentPageNumber.current,
       })
     );
-  }, [movieName]);
-
-  useEffect(() => {
-    if (movies.length !== 0 && inView) {
-      currentPageNumber.current = currentPageNumber.current + 1;
-      dispatch(
-        callMovies({
-          movieName: movieName,
-          pageNumber: currentPageNumber.current,
-        })
-      );
-    }
-  }, [inView]);
+  }, [inView, movieName]);
 
   return (
     <>

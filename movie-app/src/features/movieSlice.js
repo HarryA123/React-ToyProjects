@@ -63,14 +63,6 @@ export const movieSlice = createSlice({
         action.payload.map(item => state.movies.push(item));
       }
       state.isLoading = false;
-      //
-      // if (state.clips.some(item => item.title === action.info.title)) {
-      //   state.clips = state.clips.filter(
-      //     item => item.title !== action.info.title
-      //   );
-      // } else {
-      //   state.clips.push(action.info);
-      // }
     });
     builder.addCase(callMovies.rejected, state => {
       state.isLoading = false;

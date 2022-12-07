@@ -29,7 +29,6 @@ function Detail() {
   useEffect(() => {
     dispatch(callMovieDetail({ id: id }));
   }, []);
-
   return (
     <>
       <GlobalStyle />
@@ -51,7 +50,7 @@ function Detail() {
                   </span>
                 </DetailTitle>
                 <Info>
-                  Rating : {Math.round(detail.rating / 2)}
+                  Rating : {detail.rating} /10
                   <br />
                   RunTime : {(detail.runtime / 60).toFixed(1)}h <br />
                   Genres :{" "}
@@ -59,6 +58,8 @@ function Detail() {
                     ? detail.genres.join(", ")
                     : null}
                   <br />
+                  Language : {detail.language} <br />
+                  MPA : {detail.mpa_rating} <br />
                 </Info>
               </div>
               <div>

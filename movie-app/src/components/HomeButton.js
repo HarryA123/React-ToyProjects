@@ -1,25 +1,11 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Header, Logo, NavInput, SearchButton, Clips } from "./styles";
 
-import {
-  Header,
-  Logo,
-  NavInput,
-  SearchButton,
-  Clips,
-} from "./styles";
-
-const HeaderComponent = ({
-  onSubmit,
-  onChange,
-  movieSearch,
-}) => {
-  const param = useParams();
+const HeaderComponent = ({ onSubmit, onChange, movieSearch }) => {
   return (
     <Header>
       <Logo to={"/"}>MOVIt</Logo>
-      {typeof param.id === "string" ||
-      window.location.pathname === "/Clip" ? null : (
+      {window.location.pathname === "/" ? (
         <>
           <Clips to={"/Clip"}>나의 🤍</Clips>
           <form onSubmit={onSubmit}>
@@ -32,7 +18,7 @@ const HeaderComponent = ({
             <SearchButton onClick={onSubmit}>검색</SearchButton>
           </form>
         </>
-      )}
+      ) : null}
     </Header>
   );
 };

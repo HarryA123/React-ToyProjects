@@ -6,7 +6,7 @@ export const LoadingStyle = styled.div`
   justify-content: center;
   height: 100px;
   margin-top: 300px;
-  color: red;
+  color: #af1a1a;
   font-size: 24px;
 `;
 
@@ -49,7 +49,7 @@ export const FindError = styled.div`
   width: 150px;
   margin: 200px auto 0;
   text-align: center;
-  color: red;
+  color: #af1a1a;
   font-size: 12px;
 `;
 
@@ -136,7 +136,7 @@ export const Header = styled.div`
 
 export const Logo = styled(Link)`
   text-decoration-line: none;
-  color: red;
+  color: #af1a1a;
   font-weight: bold;
   &:focus,
   &:hover {
@@ -173,7 +173,7 @@ export const SearchButton = styled.span`
   margin-left: 6px;
   font-weight: bold;
   cursor: pointer;
-  background-color: red;
+  background-color: #af1a1a;
   padding: 5px;
   @media (max-width: 768px) {
     display: none;

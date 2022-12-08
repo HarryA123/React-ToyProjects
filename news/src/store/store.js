@@ -1,22 +1,9 @@
-// import { createStore, combineReducers} from 'redux'
-// import ReduxThunk from 'redux-thunk';
 import {
   configureStore,
   createSlice,
-  applyMiddleware,
   createAsyncThunk,
 } from "@reduxjs/toolkit";
 import axios from "axios";
-// import { persistStore , persistReducer} from "redux-persist";
-// import storage from "redux-persist/lib/storage";
-
-// const persistConfig = {
-//   key: 'persist-key',
-//   storage
-// }
-
-// const persistReducer = persistReducer(persistConfig, newsSlice.reducer);
-
 
 export const getArticle = createAsyncThunk(
   "newsSlice/getArticle",
@@ -34,17 +21,6 @@ export const getArticle = createAsyncThunk(
   }
 );
 
-// export const api = async (value, page) => {
-//   try {
-//     console.log('value: ',value, '& page: ',page)
-//     const response = await axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${value}&page=${page}&sort=newest&api-key=${process.env.REACT_APP_API_KEY}`);
-//     console.log(response.data.response.docs);
-//     return response.data.response.docs;
-//   } catch (e) {
-//     console.log(e);
-//   }
-// };
-
 export const newsSlice = createSlice({
   name: "newsSlice",
   initialState: {
@@ -56,10 +32,10 @@ export const newsSlice = createSlice({
   reducers: {
     clip: (state, action) => {
       console.log("action.payload는 객체를 가져옴.", action.payload);
-      if (state.clips.some((item) => item._id === action.payload._id)) {
+      if (state.clips.some(item => item._id === action.payload._id)) {
         console.log("뺌");
         state.clips = state.clips.filter(
-          (item) => item._id !== action.payload._id
+          item => item._id !== action.payload._id
         );
       } else {
         state.clips.push(action.payload);
@@ -70,12 +46,12 @@ export const newsSlice = createSlice({
     history: (state, action) => {
       if (state.searchHistory.length < 5) {
         state.searchHistory = state.searchHistory.filter(
-          (ele) => ele !== action.payload
+          ele => ele !== action.payload
         );
         state.searchHistory.push(action.payload);
       } else {
         state.searchHistory = state.searchHistory.filter(
-          (ele) => ele !== action.payload
+          ele => ele !== action.payload
         );
         state.searchHistory.push(action.payload);
       }
@@ -88,29 +64,32 @@ export const newsSlice = createSlice({
         state.searchHistory.shift();
       }
     },
-    clearArticles: (state) => {
+    clearArticles: state => {
       state.articles = [];
     },
   },
   extraReducers: {
-    [getArticle.pending]: (state) => {
+    [getArticle.pending]: state => {
       state.isLoading = true;
     },
     [getArticle.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
       console.log("payload는 이거!", payload);
-      payload.response.docs.map((ele) => state.articles.push(ele));
+      payload.response.docs.map(ele => state.articles.push(ele));
     },
-    [getArticle.rejected]: (state) => {
+    [getArticle.rejected]: state => {
       state.isLoading = false;
     },
   },
 });
 
-const store = configureStore({
+const rootReducer = {
   reducer: newsSlice.reducer,
-  applyMiddleware,
-});
+};
+
+const store = configureStore(rootReducer);
+
+export default store;
 
 // const api = async (searchKeyword) => {
 //   setLoading(true);
@@ -126,5 +105,3 @@ const store = configureStore({
 //   }
 //   setLoading(false);
 // };
-
-export default store;

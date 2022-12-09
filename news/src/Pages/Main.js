@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import Article from "./Article";
+import Article from "../components/Article";
 import { getArticle, newsSlice } from "../store/store";
-import { HistoryList, HistoryBox } from "./style";
+import { HistoryList, HistoryBox } from "../components/style";
 import { useInView } from "react-intersection-observer";
+import "../Styles/Main.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Main = () => {
   const [value, setValue] = useState("");
@@ -74,28 +76,38 @@ const Main = () => {
 
   return (
     <>
-      <h1>🌏New World News🌍</h1>
-      <form onSubmit={onSubmit}>
-        <input
-          autoFocus
-          type="text"
-          autoComplete="on"
-          value={value}
-          onChange={onChange}
-        />
-        <button type="submit"> click</button>
-      </form>
-      <HistoryBox>
+      <div className="NavBar">New World News</div>
+      <div className="wrapper">
+        <form className="search-input" onSubmit={onSubmit}>
+          <input
+            autoFocus
+            type="text"
+            autoComplete="on"
+            value={value}
+            onChange={onChange}
+          />
+          <div className="autocom-box">
+            {searchHistory &&
+              [...searchHistory].reverse().map(ele => {
+                return <li key={ele}>{ele}</li>;
+              })}
+          </div>
+          <div className="searchIcon" type="submit">
+            검색
+          </div>
+        </form>
+      </div>
+      {/* <HistoryBox>
         {searchHistory &&
           [...searchHistory].reverse().map(ele => {
             return <HistoryList key={ele}>{ele}</HistoryList>;
           })}
-      </HistoryBox>
+      </HistoryBox> */}
       <Link to={"/clips"}>
         <button>clips📌</button>
       </Link>
       <h2>{isLoading ? "뉴스를 불러오고 있습니다📰" : null}</h2>
-      <div>
+      <div className="Article_Container">
         {articles && articles.map(ele => <Article key={ele._id} ele={ele} />)}
       </div>
       <div ref={ref}>-</div>

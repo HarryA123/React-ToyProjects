@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useSelector  }from 'react-redux';
-
-import Article from './Article';
+import Article from '../components/Article';
 
 const Clip = () => {
   const clips = useSelector(state=>state.clips)
@@ -18,7 +17,7 @@ const Clip = () => {
       ))}
     </div>
   </>
-  )
+  ) 
 }
 
 export default Clip

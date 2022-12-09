@@ -1,0 +1,28 @@
+.ClipIcon {
+  cursor: pointer;
+}
+
+.news_Card {
+  border: 1px solid #3366ff;
+  border-radius: 6px;
+  width: 400px;
+  margin: 10px;
+  padding: 10px;
+  flex-wrap: wrap;
+}
+
+.news_Headline {
+  font-size: 18px;
+  color: black;
+  text-decoration: none;
+}
+
+.news_Snippet {
+  color: gray;
+  margin: 8px 0;
+}
+
+.news_Date {
+  font-size: 12px;
+  justify-content: flex-end;
+}/*# sourceMappingURL=Article.css.map */

@@ -3,10 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Article from "../components/Article";
 import { getArticle, newsSlice } from "../store/store";
-import { HistoryList, HistoryBox } from "../components/style";
 import { useInView } from "react-intersection-observer";
 import "../Styles/Main.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Main = () => {
   const [value, setValue] = useState("");
@@ -76,7 +74,12 @@ const Main = () => {
 
   return (
     <>
-      <div className="NavBar">New World News</div>
+      <div className="NavBar">
+        New World News
+        <Link to={"/clips"}>
+          <button>My clips</button>
+        </Link>
+      </div>
       <div className="wrapper">
         <form className="search-input" onSubmit={onSubmit}>
           <input
@@ -103,10 +106,11 @@ const Main = () => {
             return <HistoryList key={ele}>{ele}</HistoryList>;
           })}
       </HistoryBox> */}
-      <Link to={"/clips"}>
+      {/* <Link to={"/clips"}>
         <button>clips📌</button>
-      </Link>
-      <h2>{isLoading ? "뉴스를 불러오고 있습니다📰" : null}</h2>
+      </Link> */}
+      {/* <h2>{isLoading ? "뉴스를 불러오고 있습니다📰" : null}</h2> */}
+      {isLoading ? <span className="loader"></span> : null}
       <div className="Article_Container">
         {articles && articles.map(ele => <Article key={ele._id} ele={ele} />)}
       </div>

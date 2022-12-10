@@ -11,9 +11,3 @@ export const HistoryList = styled.div`
   white-space: nowrap;
   padding: 0 0.4rem 0;
 `
-export const ClipIcon = styled.span`
-  cursor: pointer;
-`
-
-
-

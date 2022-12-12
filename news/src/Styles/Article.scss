@@ -1,4 +1,4 @@
-@import "../Variables/Variables.scss";
+@import "../Variables/_Variables.scss";
 
 .ClipIcon {
   cursor: pointer;
@@ -7,25 +7,26 @@
 .news_Card {
   border: 1px solid $Primary;
   border-radius: 6px;
-  // background-color: $Primary;
-  width: 400px;
   margin: 10px;
   padding: 10px;
   flex-wrap: wrap;
 }
 
 .news_Headline {
-  font-size: $TitleSize;
+  font-weight: bold;
   color: black;
   text-decoration: none;
+  color: $Primary;
 }
 
 .news_Snippet {
   color: gray;
   margin: 8px 0;
+  line-height: 16px;
 }
 
 .news_Date {
-  font-size: 12px;
+  color: gray;
+  font-size: $SubSize;
   justify-content: flex-end;
 }

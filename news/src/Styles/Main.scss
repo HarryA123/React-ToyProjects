@@ -1,42 +1,14 @@
-@import "../Variables/Variables.scss";
+@import "../Variables/_Variables.scss";
 
-.NavBar {
-  display: flex;
-  position: fixed;
-  top: 0;
-  z-index:3;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 80px;
-  color: $Primary;
-  font-size: 12px;
-  font-weight: bold;
-  text-align: start;
-  background-color: $Bg_Main;
-  box-shadow: 1px 1px gray;
-  button {
-    background-color: $Primary;
-    color: white;
-    border: none;
-    font-weight: bold;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s ease-in;
-    &:hover {
-      background-color: $Secondary;
-    }
-  }
-}
 .wrapper {
   max-width: 600px;
-  margin: 100px auto 20px;
+  min-width: 330px;
+  margin: 140px auto;
 }
 .search-input {
+  width: 100%;
   position: relative;
   background-color: #ffffff;
-  width: 100%;
   &:focus-within {
     .autocom-box {
       padding: auto 8px;
@@ -58,7 +30,7 @@
     border-radius: 5px;
     padding: 0 60px 0 20px;
     font-size: $BodySize;
-    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
   }
   .autocom-box {
     padding: 0px;
@@ -67,8 +39,9 @@
     opacity: 0;
     pointer-events: none;
     li {
+      @include ellipsis();
       list-style: none;
-      padding: 8px 12px;
+      padding: 8px 60px 8px 20px;
       width: 100%;
       cursor: default;
       border-radius: 3px;
@@ -87,23 +60,19 @@
     top: 0;
     right: 0;
     text-align: center;
+    font-size: $BodySize;
     cursor: pointer;
-    &:hover{
+    &:hover {
       font-weight: bold;
     }
   }
 }
-// .SearchHistory {
-//   background-color: red;
-//   text-overflow: ellipsis;
-//   overflow: hidden;
-//   white-space: nowrap;
-//   padding: 0 0.4rem 0;
-// }
 .Article_Container {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, max-content));
+  grid-gap: 4px;
   justify-content: center;
+  padding: initial;
 }
 
 .loader {

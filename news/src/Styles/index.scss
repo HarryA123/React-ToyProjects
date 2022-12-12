@@ -1,4 +1,4 @@
-@import "../Variables/Variables.scss";
+@import "../Variables/_Variables.scss";
 
 * {
   box-sizing: border-box;
@@ -10,5 +10,5 @@ html {
 
 body {
   margin: 0;
-  background-color: pink;
+  font-size: 14px;
 }

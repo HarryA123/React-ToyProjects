@@ -1,42 +1,13 @@
-.NavBar {
-  display: flex;
-  position: fixed;
-  top: 0;
-  z-index: 3;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 80px;
-  color: #3366ff;
-  font-size: 12px;
-  font-weight: bold;
-  text-align: start;
-  background-color: #ffffff;
-  box-shadow: 1px 1px gray;
-}
-.NavBar button {
-  background-color: #3366ff;
-  color: white;
-  border: none;
-  font-weight: bold;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s ease-in;
-}
-.NavBar button:hover {
-  background-color: #1f57ff;
-}
-
 .wrapper {
   max-width: 600px;
-  margin: 100px auto 20px;
+  min-width: 330px;
+  margin: 140px auto;
 }
 
 .search-input {
+  width: 100%;
   position: relative;
   background-color: #ffffff;
-  width: 100%;
 }
 .search-input:focus-within .autocom-box {
   padding: auto 8px;
@@ -56,8 +27,8 @@
   border: none;
   border-radius: 5px;
   padding: 0 60px 0 20px;
-  font-size: 12px;
-  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
 }
 .search-input .autocom-box {
   padding: 0px;
@@ -67,8 +38,11 @@
   pointer-events: none;
 }
 .search-input .autocom-box li {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   list-style: none;
-  padding: 8px 12px;
+  padding: 8px 60px 8px 20px;
   width: 100%;
   cursor: default;
   border-radius: 3px;
@@ -86,6 +60,7 @@
   top: 0;
   right: 0;
   text-align: center;
+  font-size: 14px;
   cursor: pointer;
 }
 .search-input .searchIcon:hover {
@@ -93,9 +68,12 @@
 }
 
 .Article_Container {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, -webkit-max-content));
+  grid-template-columns: repeat(auto-fit, minmax(320px, max-content));
+  grid-gap: 4px;
   justify-content: center;
+  padding: initial;
 }
 
 .loader {

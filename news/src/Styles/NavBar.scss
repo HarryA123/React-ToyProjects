@@ -1,0 +1,64 @@
+@import "../Variables/_Variables.scss";
+
+@include mobile {
+  .NavBar {
+    padding: 12px 16px;
+  }
+}
+
+@include tablet {
+  .NavBar {
+    padding: 12px 40px;
+  }
+}
+
+@include desktop {
+  .NavBar {
+    padding: 12px 80px;
+  }
+}
+
+.NavBar {
+  display: flex;
+  position: fixed;
+  top: 0;
+  z-index: 3;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $Bg_Main;
+  box-shadow: 1px 1px gray;
+  a {
+    &:link {
+      text-decoration: none;
+    }
+    &:visited {
+      text-decoration: none;
+    }
+    &:hover {
+      text-decoration: none;
+    }
+    &:active {
+      text-decoration: none;
+    }
+  }
+  span {
+    color: $Primary;
+    font-size: $BodySize;
+    font-weight: bold;
+    text-align: start;
+  }
+  button {
+    font-size: $BodySize;
+    background-color: $Primary;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease-in;
+    &:hover {
+      background-color: $Secondary;
+    }
+  }
+}

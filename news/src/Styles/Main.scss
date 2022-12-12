@@ -9,6 +9,21 @@
   width: 100%;
   position: relative;
   background-color: #ffffff;
+  .autocom-box {
+    padding: 0px;
+    max-height: 280px;
+    overflow-y: auto;
+    opacity: 0;
+    pointer-events: none;
+    li {
+      @include ellipsis();
+      list-style: none;
+      padding: 8px 60px 8px 20px;
+      width: 100%;
+      border-radius: 3px;
+      display: none;
+    }
+  }
   &:focus-within {
     .autocom-box {
       padding: auto 8px;
@@ -32,25 +47,7 @@
     font-size: $BodySize;
     box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
   }
-  .autocom-box {
-    padding: 0px;
-    max-height: 280px;
-    overflow-y: auto;
-    opacity: 0;
-    pointer-events: none;
-    li {
-      @include ellipsis();
-      list-style: none;
-      padding: 8px 60px 8px 20px;
-      width: 100%;
-      cursor: default;
-      border-radius: 3px;
-      display: none;
-      &:hover {
-        background-color: $gray;
-      }
-    }
-  }
+
   .searchIcon {
     position: absolute;
     height: 55px;

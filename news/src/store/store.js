@@ -25,15 +25,12 @@ export const newsSlice = createSlice({
   },
   reducers: {
     clip: (state, action) => {
-      console.log("action.payload는 객체를 가져옴.", action.payload);
       if (state.clips.some(item => item._id === action.payload._id)) {
-        console.log("뺌");
         state.clips = state.clips.filter(
           item => item._id !== action.payload._id
         );
       } else {
         state.clips.push(action.payload);
-        console.log("넣었음!");
       }
     },
     history: (state, action) => {
@@ -67,7 +64,6 @@ export const newsSlice = createSlice({
     },
     [getArticle.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      console.log("payload는 이거!", payload);
       payload.response.docs.map(ele => state.articles.push(ele));
     },
     [getArticle.rejected]: state => {

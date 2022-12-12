@@ -5,7 +5,6 @@ import "../Styles/Clip.css";
 
 const Clip = () => {
   const clips = useSelector(state => state.clips);
-  console.log("clipped List: ", typeof clips);
 
   return (
     <>

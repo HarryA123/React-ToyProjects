@@ -22,5 +22,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# API_KEY
+# REACT_APP_API_KEY
 .env

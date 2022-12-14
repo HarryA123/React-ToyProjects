@@ -5,11 +5,13 @@ import {
 } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const API_KEY = process.env.REACT_APP_API_KEY;
+
 export const getArticle = createAsyncThunk(
   "newsSlice/getArticle",
   async ({ value, page }) => {
     const response = await axios.get(
-      `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${value}&page=${page}&sort=newest&api-key=${process.env.REACT_APP_API_KEY}`
+      `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${value}&page=${page}&sort=newest&api-key=${API_KEY}`
     );
     return response.data;
   }

@@ -1,10 +1,11 @@
 import "../Styles/Article.css";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { newsSlice } from "../store/store";
 
-const Article = ({ ele }) => {
-  const dispatch = useDispatch();
-  const clips = useSelector(state => state.clips);
+const Article = ({ ele }:any) => {
+  const dispatch = useAppDispatch();
+  const clips = useAppSelector(state => state.clips);
   return (
     <div className="news_Card">
       <span

@@ -1,19 +1,20 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import Article from "../components/Article";
 import { getArticle, newsSlice } from "../store/store";
 import { useInView } from "react-intersection-observer";
 import "../Styles/Main.css";
 import NavBar from "../components/NavBar";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 
 const Main = () => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState<string>("");
   const { ref, inView } = useInView();
-  const articles = useSelector(state => state.articles);
-  const isLoading = useSelector(state => state.isLoading);
-  const searchHistory = useSelector(state => state.searchHistory);
-  const dispatch = useDispatch();
-  const timer = useRef(null);
+  const articles = useAppSelector(state => state.articles);
+  const isLoading = useAppSelector(state => state.isLoading);
+  const searchHistory = useAppSelector(state => state.searchHistory);
+  const dispatch = useAppDispatch();
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // const timer = useRef<number | null>(null)
   const nextPage = useRef(1);
 
   useEffect(() => {
@@ -23,28 +24,30 @@ const Main = () => {
     }
   }, [inView]);
 
-  const onChange = e => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(e);
     setValue(e.target.value);
     if (e.target.value) {
       clearTimeout(timer.current);
       timer.current = setTimeout(() => {
-        if (e.target.value) {
-          e.preventDefault();
-          dispatch(newsSlice.actions.clearArticles());
-          dispatch(getArticle({ value: e.target.value, page: 1 }));
-          if (searchHistory.includes(e.target.value)) {
-            dispatch(newsSlice.actions.history(e.target.value));
-          } else {
-            dispatch(newsSlice.actions.historyUpdate(e.target.value));
-          }
+      if (e.target.value) {
+        e.preventDefault();
+        dispatch(newsSlice.actions.clearArticles());
+        dispatch(getArticle({ value: e.target.value, page: 1 }));
+        if (searchHistory.includes(e.target.value)) {
+          dispatch(newsSlice.actions.history(e.target.value));
         } else {
-          e.preventDefault();
+          dispatch(newsSlice.actions.historyUpdate(e.target.value));
         }
+      } else {
+        e.preventDefault();
+      }
       }, 2000);
     }
     return;
   };
-  const onSubmit = e => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    console.log(e);
     if (value) {
       e.preventDefault();
       dispatch(getArticle({ value: value, page: 1 }));
@@ -76,7 +79,7 @@ const Main = () => {
                 return <li key={ele}>{ele}</li>;
               })}
           </div>
-          <div className="searchIcon" type="submit">
+          <div className="searchIcon" typeof="submit">
             검색
           </div>
         </form>

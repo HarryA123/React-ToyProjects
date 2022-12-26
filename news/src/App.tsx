@@ -1,7 +1,7 @@
 import React from "react";
 import Main from "./Pages/Main";
 import Clip from "./Pages/Clip";
-import NotFound from "./components/NotFound";
+import NotFound from "./components/NotFound"
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
 const App = () => {

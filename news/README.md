@@ -5,7 +5,7 @@ NWN은 뉴욕타임즈의 기사들을 검색하고 읽을 수 있는 곳입니�
 
 # Live Demo
 
-[Demo](https://react-movie-app-three-pink.vercel.app/)
+[Demo](https://react-news-mu.vercel.app/)
 <br/><br/><br/>
 
 # Installation

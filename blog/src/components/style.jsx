@@ -31,6 +31,7 @@ export const Container = styled.div`
 export const InputStyle = styled.input`
   width: 100%;
   border: none;
+  border-bottom: 3px solid gray;
   margin-bottom: 16px;
   font-size: 20px;
   ::placeholder {
@@ -47,6 +48,7 @@ export const InputStyle = styled.input`
 export const TitleStyle = styled.div`
   width: 100%;
   margin-bottom: 16px;
+  border-bottom: 3px solid gray;
   font-size: 20px;
 `;
 
@@ -78,6 +80,15 @@ export const ButtonStyle = styled(Link)`
   padding: 4px 12px;
 `;
 
+export const ButtonStyle2 = styled(Link)`
+  color: white;
+  /* border-radius: 4px; */
+  /* cursor: pointer; */
+  /* font-size: 12px; */
+  /* font-weight: bold; */
+  background-color: red;
+`;
+
 export const ContentButtonStyle = styled.div`
   color: white;
   border-radius: 4px;
@@ -106,17 +117,6 @@ export const ContentButton = ({
   const dispatch = useDispatch();
   const state = useSelector(state => state.posting);
   const params = useParams();
-  console.log(
-    "🦺어떤 프롭스가 있냐",
-    name,
-    titleInValid,
-    titleRef,
-    contentInValid,
-    contentRef,
-    titleInput,
-    contentInput,
-    setEdit
-  );
 
   if (name === "올리기") {
     const publishBtn = event => {
@@ -138,9 +138,9 @@ export const ContentButton = ({
       }
     };
     return (
-      <ButtonStyle onClick={publishBtn} to="/">
+      <ButtonStyle2 onClick={publishBtn} to="/">
         {name}
-      </ButtonStyle>
+      </ButtonStyle2>
     );
   } else if (name === "수정") {
     return (

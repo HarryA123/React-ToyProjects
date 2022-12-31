@@ -4,20 +4,18 @@ import { useParams, Link } from "react-router-dom";
 import styled from "styled-components";
 
 const ButtonStyle = styled(Link)`
-  padding: 0.6em 1.4em;
-  border-radius: 0.4em;
-  background-color: black;
   color: white;
+  border-radius: 4px;
   cursor: pointer;
-  position: absolute;
-  right: 2em;
-  bottom: 2em;
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: bold;
+  background-color: #ec02a1;
+  padding: 4px 12px;
 `;
 
-const Button = (props) => {
+const Button = props => {
   const dispatch = useDispatch();
-  const state = useSelector((state) => state.posting);
+  const state = useSelector(state => state.posting);
   const params = useParams();
 
   if (props.delete === "삭제") {
@@ -30,15 +28,14 @@ const Button = (props) => {
             type: "POST_DELETE",
             payload: state[params.index].title,
           });
-        }}
-      >
+        }}>
         {props.delete}
       </ButtonStyle>
     );
   } else if (props.write === "글쓰기") {
     return <ButtonStyle to="/post">{props.write}</ButtonStyle>;
   } else if (props.publish === "올리기") {
-    const publishBtn = (event) => {
+    const publishBtn = event => {
       if (!props.titleInValid) {
         props.titleRef.current.focus();
         event.preventDefault();
@@ -60,7 +57,11 @@ const Button = (props) => {
         {props.publish}
       </ButtonStyle>
     );
-  } else if (props.modified === "수정완료") {
+  }
+  // else if(props.edit === "수정"){
+  //     return <ButtonStyle to="/edit">{props.edit}</ButtonStyle>;
+  // }
+  else if (props.modified === "수정완료") {
     const publishBtn = () => {
       return dispatch({
         type: "POST_EDIT_SUCCESS",
@@ -73,7 +74,7 @@ const Button = (props) => {
     };
 
     return (
-      <ButtonStyle to='/' onClick={publishBtn}>
+      <ButtonStyle to="/" onClick={publishBtn}>
         {props.modified}
       </ButtonStyle>
     );

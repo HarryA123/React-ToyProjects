@@ -1,44 +1,5 @@
 import { useState, useRef } from "react";
-import styled from "styled-components";
-import Button from "./buttons/Button";
-
-const ContainerStyle = styled.div`
-  height: 30em;
-  /* border: 2px solid gray; */
-  border-radius: 1em;
-  padding: 1em;
-  margin: 8em 20em 0;
-  position: relative;
-`;
-
-const InputStyle = styled.input`
-  margin: 0.4em auto;
-  width: 100%;
-  border: none;
-  font-size: 28px;
-  ::placeholder {
-    font-weight: bolder;
-  }
-  &:focus {
-    outline: none;
-  }
-  &:focus::placeholder {
-    color: transparent;
-  }
-`;
-
-const TextAreaStyle = styled.textarea`
-  width: 100%;
-  height: 20em;
-  border: none;
-  resize: none;
-  &:focus {
-    outline: none;
-  }
-  &:focus::placeholder {
-    color: transparent;
-  }
-`;
+import { Container, InputStyle, TextAreaStyle, ContentButton } from "./style";
 
 const CreateForm = () => {
   const [titleInput, setTitleInput] = useState("");
@@ -48,18 +9,18 @@ const CreateForm = () => {
   const titleRef = useRef(null);
   const contentRef = useRef(null);
 
-  const titleChange = (event) => {
+  const titleChange = event => {
     setTitleInput(event.target.value);
   };
-  const contentChange = (event) => {
+  const contentChange = event => {
     setContentInput(event.target.value);
   };
 
   return (
-    <ContainerStyle>
+    <Container>
       <form>
         <InputStyle
-          placeholder="Title"
+          placeholder="제목을 입력해주세요"
           id="Title"
           ref={titleRef}
           value={titleInput}
@@ -67,7 +28,7 @@ const CreateForm = () => {
           type="text"
         />
         <TextAreaStyle
-          placeholder="Content"
+          placeholder="내용을 입력해주세요"
           id="Content"
           ref={contentRef}
           value={contentInput}
@@ -75,18 +36,18 @@ const CreateForm = () => {
           type="text"
         />
         <div>
-          <Button
+          <ContentButton
             contentInValid={contentInValid}
             titleInValid={titleInValid}
             contentRef={contentRef}
             titleRef={titleRef}
-            publish={"올리기"}
+            name="올리기"
             titleInput={titleInput}
             contentInput={contentInput}
-          ></Button>
+            color="gray"/>
         </div>
       </form>
-    </ContainerStyle>
+    </Container>
   );
 };
 

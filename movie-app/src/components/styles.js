@@ -156,7 +156,11 @@ export const Clips = styled(Link)`
   color: white;
   text-decoration: none;
   font-size: 12px;
-  margin-right: 10px;
+  margin-right: 20px;
+  border: 1px solid red;
+  padding: 3px 10px;
+  border-radius: 4px;
+  background-color: #af1a1a;
 `;
 
 export const NavInput = styled.input`

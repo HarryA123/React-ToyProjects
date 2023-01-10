@@ -151,6 +151,13 @@ export const Logo = styled(Link)`
   }
 `;
 
+export const LoginButton = styled(Link)`
+  color: white;
+  font-size: 12px;
+  text-decoration: none;
+  margin-left: 20px;
+`;
+
 export const Clips = styled(Link)`
   margin-left: auto;
   color: white;
@@ -224,4 +231,52 @@ export const DetailColumn = styled.div`
   @media (max-width: 768px) {
     padding: 0;
   }
+`;
+
+export const LoginContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px 16px;
+  width: 400px;
+  margin: 80px auto;
+  background-color: #202020;
+`;
+
+export const LoginText = styled.div`
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 28px;
+`;
+
+export const LoginFormText = styled.div`
+  margin-bottom: 4px;
+  margin-top: 20px;
+`;
+
+export const LoginFormErrorText = styled.div`
+  margin-top: 4px;
+  color: red;
+  font-size: 10px;
+`;
+
+export const LoginInput = styled.input`
+  width: 100%;
+  height: 28px;
+  background-color: transparent;
+  border-color: transparent;
+  border-style: none;
+  border-bottom: 1px solid white;
+  color: #d0d0d0;
+  :focus {
+    outline: none;
+    color: white;
+  }
+`;
+
+export const LoginSubmit = styled.button`
+  width: 100%;
+  padding: 8px;
+  margin-top: 40px;
+  cursor: pointer;
 `;

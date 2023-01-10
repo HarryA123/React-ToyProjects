@@ -235,11 +235,17 @@ export const DetailColumn = styled.div`
 
 export const LoginContainer = styled.div`
   display: flex;
+  height: 100vh;
+  align-items: center;
+`;
+
+export const LoginBox = styled.div`
+  display: flex;
   flex-direction: column;
   gap: 40px;
   padding: 40px 16px;
   width: 400px;
-  margin: 80px auto;
+  margin: auto;
   background-color: #202020;
 `;
 
@@ -277,6 +283,25 @@ export const LoginInput = styled.input`
 export const LoginSubmit = styled.button`
   width: 100%;
   padding: 8px;
-  margin-top: 40px;
+  margin-top: 80px;
+  background: ${props => (props.notAllow ? "#af1a1a" : "#565656")};
+  color: white;
+  border: 1px solid #565656;
+  border-radius: 4px;
+  font-weight: bold;
   cursor: pointer;
+  :disabled {
+    background-color: #565656;
+    color: #6f6f6f;
+  }
+`;
+
+export const SignUpLink = styled(Link)`
+  color: gray;
+  font-size: 10px;
+`;
+
+export const SignUpBox = styled.div`
+  text-align: center;
+  margin-top: 20px;
 `;

@@ -1,5 +1,12 @@
 import React from "react";
-import { Header, Logo, NavInput, SearchButton, Clips } from "./styles";
+import {
+  Header,
+  Logo,
+  NavInput,
+  LoginButton,
+  SearchButton,
+  Clips,
+} from "./styles";
 
 const HeaderComponent = ({ onSubmit, onChange, movieSearch }) => {
   return (
@@ -19,6 +26,7 @@ const HeaderComponent = ({ onSubmit, onChange, movieSearch }) => {
           </form>
         </>
       ) : null}
+      <LoginButton to={"/Login"}>💕로그인</LoginButton>
     </Header>
   );
 };

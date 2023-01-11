@@ -50,7 +50,6 @@ export const FindError = styled.div`
   margin: 200px auto 0;
   text-align: center;
   color: #af1a1a;
-  font-size: 12px;
 `;
 
 export const ListContainer = styled.div`
@@ -92,7 +91,6 @@ export const Title = styled.p`
   color: white;
   font-weight: 700;
   margin: 0;
-  font-size: 12px;
   &:visited {
     color: gray;
   }
@@ -102,7 +100,6 @@ export const Poster = styled.img`
 `;
 export const Info = styled.span`
   color: white;
-  font-size: 12px;
 `;
 export const FlexColumn = styled.div`
   display: flex;
@@ -151,36 +148,25 @@ export const Logo = styled(Link)`
   }
 `;
 
-export const LoginButton = styled(Link)`
-  color: white;
-  font-size: 12px;
-  text-decoration: none;
-  margin-left: 20px;
-`;
 
 export const Clips = styled(Link)`
   margin-left: auto;
   color: white;
   text-decoration: none;
-  font-size: 12px;
   margin-right: 20px;
   border: 1px solid red;
   padding: 3px 10px;
   border-radius: 4px;
   background-color: #af1a1a;
-`;
+  `;
 
 export const NavInput = styled.input`
   border: none;
   padding: 4px;
-  ::placeholder {
-    font-size: 12px;
-  }
-`;
+  `;
 
 export const SearchButton = styled.span`
   color: white;
-  font-size: 12px;
   margin-left: 6px;
   font-weight: bold;
   cursor: pointer;
@@ -194,7 +180,6 @@ export const SearchButton = styled.span`
 export const DetailContainer = styled.div`
   color: white;
   margin: 80px;
-  font-size: 12px;
   @media (max-width: 768px) {
     margin: 80px 16px;
   }
@@ -205,7 +190,7 @@ export const DetailTitle = styled.div`
   padding: 0;
   font-weight: bold;
   margin-bottom: 10px;
-`;
+  `;
 export const DetailImage = styled.img`
   height: 200px;
   @media (max-width: 768px) {
@@ -221,7 +206,7 @@ export const DetailRow = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
   }
-`;
+  `;
 
 export const DetailColumn = styled.div`
   display: flex;
@@ -231,22 +216,40 @@ export const DetailColumn = styled.div`
   @media (max-width: 768px) {
     padding: 0;
   }
+  `;
+
+export const LogoutButton = styled.div`
+color: white;
+font-size: 10px;
+text-decoration: none;
+margin-left: 20px;
+cursor: pointer;
+`;
+
+export const LoginButton = styled(Link)`
+  color: white;
+  font-size: 10px;
+  text-decoration: none;
+  margin-left: 20px;
 `;
 
 export const LoginContainer = styled.div`
   display: flex;
   height: 100vh;
   align-items: center;
-`;
+  justify-content: center;
+  `;
 
 export const LoginBox = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: ${props => (props.signUp ? "12px" : "40px")};
   padding: 40px 16px;
   width: 400px;
-  margin: auto;
   background-color: #202020;
+  @media (max-width: 768px) {
+    margin: 16px;
+  }
 `;
 
 export const LoginText = styled.div`
@@ -258,6 +261,7 @@ export const LoginText = styled.div`
 export const LoginFormText = styled.div`
   margin-bottom: 4px;
   margin-top: 20px;
+  font-size: 10px;
 `;
 
 export const LoginFormErrorText = styled.div`
@@ -283,7 +287,7 @@ export const LoginInput = styled.input`
 export const LoginSubmit = styled.button`
   width: 100%;
   padding: 8px;
-  margin-top: 80px;
+  margin-top: ${props => (props.signUp ? "40px" : "80px")};
   background: ${props => (props.notAllow ? "#af1a1a" : "#565656")};
   color: white;
   border: 1px solid #565656;
@@ -298,10 +302,10 @@ export const LoginSubmit = styled.button`
 
 export const SignUpLink = styled(Link)`
   color: gray;
-  font-size: 10px;
 `;
 
 export const SignUpBox = styled.div`
   text-align: center;
+  font-size: 10px;
   margin-top: 20px;
 `;

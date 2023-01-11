@@ -2,6 +2,7 @@ import GlobalStyle from "../GlobalStyle";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import {
   LoginContainer,
@@ -29,11 +30,6 @@ const schema = yup.object({
     .required("칸이 비어있습니다."),
 });
 
-const User = {
-  email: "text@abc.com",
-  password: "123456",
-};
-
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -41,6 +37,10 @@ function Login() {
   const [passwordValid, setPasswordValid] = useState(false);
   const [notAllow, setNotAllow] = useState(true);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const User = useSelector(state => state.user.user);
+  const [STORE_EMAIL] = User.map(item => item.email);
+  const [STORE_PASSWORD] = User.map(item => item.password);
 
   const {
     register,
@@ -48,10 +48,10 @@ function Login() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onSubmit = data => {
-    console.log(data);
-    if (email === User.email && password === User.password) {
+  const onSubmit = () => {
+    if (email === STORE_EMAIL && password === STORE_PASSWORD) {
       alert("로그인 되었습니다");
+      dispatch({ type: "user/loginState", isLogin: true });
       navigate("/");
     } else {
       alert("등록되지 않은 회원입니다");
@@ -61,11 +61,9 @@ function Login() {
   useEffect(() => {
     if (emailValid && passwordValid) {
       setNotAllow(false);
-      console.log("승인");
       return;
     } else {
       setNotAllow(true);
-      console.log("비승인");
     }
   }, [emailValid, passwordValid]);
 
@@ -117,7 +115,6 @@ function Login() {
               {...register("Password")}
             />
             <LoginFormErrorText>{errors.Password?.message}</LoginFormErrorText>
-            <br />
             {notAllow ? (
               <LoginSubmit type="submit">로그인</LoginSubmit>
             ) : (
@@ -126,7 +123,7 @@ function Login() {
               </LoginSubmit>
             )}
             <SignUpBox>
-              <SignUpLink to={"/"}>회원가입</SignUpLink>
+              <SignUpLink to={"/SignUp"}>회원가입</SignUpLink>
             </SignUpBox>
           </form>
         </LoginBox>

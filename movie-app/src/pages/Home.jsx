@@ -17,7 +17,7 @@ function Home() {
   const [movieName, setMovieName] = useState("");
   const currentPageNumber = useRef(1);
   const { ref, inView } = useInView();
-  const { movies, isLoading, success } = useSelector(state => state.reducer);
+  const { movies, isLoading, success } = useSelector(state => state.movie);
   const dispatch = useDispatch();
 
   const onChange = event => {
@@ -40,27 +40,6 @@ function Home() {
       );
     }
   };
-
-  // useEffect(() => {
-  //   dispatch(
-  //     callMovies({
-  //       movieName: movieName,
-  //       pageNumber: currentPageNumber.current,
-  //     })
-  //   );
-  // }, [movieName]);
-
-  // useEffect(() => {
-  //   if (movies.length !== 0 && inView) {
-  //     currentPageNumber.current = currentPageNumber.current + 1;
-  //     dispatch(
-  //       callMovies({
-  //         movieName: movieName,
-  //         pageNumber: currentPageNumber.current,
-  //       })
-  //     );
-  //   }
-  // }, [inView]);
 
   useEffect(() => {
     movies.length !== 0 &&

@@ -4,7 +4,7 @@ import { ClipListContainer, PageTitle } from "../components/styles";
 import Movie from "../components/Movie";
 import { useSelector } from "react-redux";
 function Clip() {
-  const clips = useSelector(state => state.reducer.clips);
+  const clips = useSelector(state => state.movie.clips);
 
   return (
     <>

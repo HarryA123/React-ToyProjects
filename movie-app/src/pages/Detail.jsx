@@ -16,7 +16,7 @@ import {
 
 function Detail() {
   const { id } = useParams();
-  const { detail, isLoading, clips } = useSelector(state => state.reducer);
+  const { detail, isLoading, clips } = useSelector(state => state.movie);
   const dispatch = useDispatch();
 
   const getClip = () => {

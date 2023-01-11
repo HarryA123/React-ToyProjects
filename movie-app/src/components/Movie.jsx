@@ -11,7 +11,7 @@ function Movie({
   runtime,
   genres,
 }) {
-  const clips = useSelector(state => state.reducer.clips);
+  const clips = useSelector(state => state.movie.clips);
   const dispatch = useDispatch();
   const getClip = () => {
     dispatch({

@@ -22,9 +22,9 @@ const HeaderComponent = ({ onSubmit, onChange, movieSearch }) => {
   return (
     <Header>
       <Logo to={"/"}>MOVIt</Logo>
-      {window.location.pathname === "/" ? (
+      {window.location.pathname === "/" && (
         <>
-          <Clips to={"/Clip"}>나의 🤍</Clips>
+          <Clips to={"/Clip"}>My Clips</Clips>
           <form onSubmit={onSubmit}>
             <NavInput
               placeholder="Search..."
@@ -34,12 +34,12 @@ const HeaderComponent = ({ onSubmit, onChange, movieSearch }) => {
             />
             <SearchButton onClick={onSubmit}>검색</SearchButton>
           </form>
+          {isLogin ? (
+            <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
+          ) : (
+            <LoginButton to={"/Login"}>로그인</LoginButton>
+          )}
         </>
-      ) : null}
-      {isLogin ? (
-        <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
-      ) : (
-        <LoginButton to={"/Login"}>로그인</LoginButton>
       )}
     </Header>
   );

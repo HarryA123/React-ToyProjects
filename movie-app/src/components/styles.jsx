@@ -66,7 +66,7 @@ export const ClipListContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   @media (max-width: 768px) {
-    margin: 80px 16px;
+    margin: 40px 16px;
   }
 `;
 
@@ -82,9 +82,14 @@ export const Container = styled.div`
   }
 `;
 
-export const PageTitle = styled.h3`
+export const PageTitle = styled.div`
   color: white;
-  margin: 60px 90px 20px;
+  margin: 60px 90px;
+  font-weight: bold;
+  font-size: 16px;
+  @media (max-width: 768px) {
+    margin: 60px 16px;
+  }
 `;
 
 export const Title = styled.p`
@@ -163,6 +168,9 @@ export const Clips = styled(Link)`
 export const NavInput = styled.input`
   border: none;
   padding: 4px;
+  @media (max-width: 768px) {
+    width: 100px;
+  }
   `;
 
 export const SearchButton = styled.span`

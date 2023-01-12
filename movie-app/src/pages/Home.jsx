@@ -24,6 +24,7 @@ function Home() {
     setMovieSearch(event.target.value);
   };
 
+  console.log(inView);
   const onSubmit = event => {
     event.preventDefault();
     if (movieSearch.trim() === "") {
@@ -88,8 +89,9 @@ function Home() {
             {movies.length < 20 && isLoading === false ? (
               <LastPage>- 마지막 페이지 입니다 -</LastPage>
             ) : (
-              <Spinner ref={ref} className="loader" />
+              <Spinner className="loader" />
             )}
+            {!isLoading && <div ref={ref}></div>}
           </>
         ) : (
           <FindError>

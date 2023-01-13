@@ -19,12 +19,23 @@ const HeaderComponent = ({ onSubmit, onChange, movieSearch }) => {
     alert("로그아웃 되었습니다.");
   };
 
+  const handleClip = (e) => {
+    if (!isLogin) {
+      e.preventDefault()
+      alert("로그인이 필요합니다.");
+    } else {
+      return;
+    }
+  };
+
   return (
     <Header>
       <Logo to={"/"}>MOVIt</Logo>
       {window.location.pathname === "/" && (
         <>
-          <Clips to={"/Clip"}>My Clips</Clips>
+          <Clips onClick={handleClip} to={"/Clip"}>
+            My Clips
+          </Clips>
           <form onSubmit={onSubmit}>
             <NavInput
               placeholder="Search..."

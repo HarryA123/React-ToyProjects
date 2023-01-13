@@ -24,7 +24,6 @@ function Home() {
     setMovieSearch(event.target.value);
   };
 
-  console.log(inView);
   const onSubmit = event => {
     event.preventDefault();
     if (movieSearch.trim() === "") {

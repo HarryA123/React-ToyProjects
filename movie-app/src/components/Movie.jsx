@@ -12,12 +12,17 @@ function Movie({
   genres,
 }) {
   const clips = useSelector(state => state.movie.clips);
+  const isLogin = useSelector(state => state.user.isLogin);
   const dispatch = useDispatch();
   const getClip = () => {
-    dispatch({
-      type: "film/clip",
-      info: { id, title, year, medium_cover_image, rating, runtime, genres },
-    });
+    if (!isLogin) {
+      alert("로그인이 필요합니다.");
+    } else {
+      dispatch({
+        type: "film/clip",
+        info: { id, title, year, medium_cover_image, rating, runtime, genres },
+      });
+    }
   };
 
   return (
@@ -31,7 +36,7 @@ function Movie({
             {title} ({year})
           </Title>
           <div onClick={getClip}>
-            {clips.map(item => item.title).includes(title) ? "🧡" : "🤍"}
+            {isLogin && clips.map(item => item.title).includes(title) ? "🧡" : "🤍"}
           </div>
           <Info>
             Rating : {rating} <br /> RunTime : {(runtime / 60).toFixed(1)}h

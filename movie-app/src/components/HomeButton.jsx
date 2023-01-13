@@ -19,9 +19,9 @@ const HeaderComponent = ({ onSubmit, onChange, movieSearch }) => {
     alert("로그아웃 되었습니다.");
   };
 
-  const handleClip = (e) => {
+  const handleClip = e => {
     if (!isLogin) {
-      e.preventDefault()
+      e.preventDefault();
       alert("로그인이 필요합니다.");
     } else {
       return;

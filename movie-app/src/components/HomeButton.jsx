@@ -14,7 +14,7 @@ import {
 } from "./styles";
 
 const HeaderComponent = ({ onSubmit, onChange, movieSearch }) => {
-  const [menuToggle, setMenuToggle] = useState(false);
+  const [showSideBar, setShowSideBar] = useState(true);
   const isLogin = useSelector(state => state.user.isLogin);
   const dispatch = useDispatch();
 
@@ -23,7 +23,7 @@ const HeaderComponent = ({ onSubmit, onChange, movieSearch }) => {
     alert("로그아웃 되었습니다.");
   };
   const handleMenu = e => {
-    setMenuToggle(!menuToggle);
+    setShowSideBar(!showSideBar);
   };
 
   const handleClip = e => {
@@ -40,7 +40,7 @@ const HeaderComponent = ({ onSubmit, onChange, movieSearch }) => {
       <Logo to={"/"}>MOVIt</Logo>
       {window.location.pathname === "/" && (
         <>
-          {!menuToggle ? (
+          {showSideBar ? (
             <>
               <form onSubmit={onSubmit}>
                 <NavInput
@@ -67,12 +67,12 @@ const HeaderComponent = ({ onSubmit, onChange, movieSearch }) => {
                   alt="MenuBar"
                 />
               </SideBarBox>
-              <SideBarBox list>
+              <SideBarBox hover>
                 <SideBarLink onClick={handleClip} to={"/Clip"}>
                   MyClips
                 </SideBarLink>
               </SideBarBox>
-              <SideBarBox list>
+              <SideBarBox hover>
                 {isLogin ? (
                   <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
                 ) : (

@@ -164,6 +164,9 @@ export const NavInput = styled.input`
   border-bottom: 1px solid gray;
   color: white;
   text-align: center;
+  @media (max-width: 768px) {
+    width: 200px;
+  }
 `;
 
 export const LogoutButton = styled.div`
@@ -197,6 +200,9 @@ export const MenuCloseIcon = styled.img`
   cursor: pointer;
   margin-left: auto;
   margin-right: 80px;
+  @media (max-width: 768px) {
+    margin-right: 16px;
+  }
 `;
 
 export const SideBar = styled.div`
@@ -212,6 +218,9 @@ export const SideBar = styled.div`
   flex-direction: column;
   border-left: 1px solid gray;
   z-index: 1;
+  @media (max-width: 768px) {
+    width: 200px;
+  }
 `;
 export const SideBarBox = styled.div`
   display: flex;
@@ -221,7 +230,7 @@ export const SideBarBox = styled.div`
   list-style: none;
   height: 60px;
   :hover {
-    background-color: ${props => (props.list ? "#af1a1a" : "none")};
+    background-color: ${props => (props.hover ? "#af1a1a" : "black")};
   }
 `;
 

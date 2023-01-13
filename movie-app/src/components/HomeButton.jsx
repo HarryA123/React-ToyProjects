@@ -1,22 +1,29 @@
 import React from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Header,
   Logo,
+  MenuIcon,
+  MenuCloseIcon,
   NavInput,
-  LoginButton,
-  SearchButton,
   LogoutButton,
-  Clips,
+  SideBarLink,
+  SideBar,
+  SideBarBox,
 } from "./styles";
 
 const HeaderComponent = ({ onSubmit, onChange, movieSearch }) => {
+  const [menuToggle, setMenuToggle] = useState(false);
   const isLogin = useSelector(state => state.user.isLogin);
   const dispatch = useDispatch();
 
-  const handleLogout = () => {
+  const handleLogout = e => {
     dispatch({ type: "user/loginState", isLogin: false });
     alert("로그아웃 되었습니다.");
+  };
+  const handleMenu = e => {
+    setMenuToggle(!menuToggle);
   };
 
   const handleClip = e => {
@@ -33,22 +40,46 @@ const HeaderComponent = ({ onSubmit, onChange, movieSearch }) => {
       <Logo to={"/"}>MOVIt</Logo>
       {window.location.pathname === "/" && (
         <>
-          <Clips onClick={handleClip} to={"/Clip"}>
-            My Clips
-          </Clips>
-          <form onSubmit={onSubmit}>
-            <NavInput
-              placeholder="Search..."
-              type="text"
-              onChange={onChange}
-              value={movieSearch}
-            />
-            <SearchButton onClick={onSubmit}>검색</SearchButton>
-          </form>
-          {isLogin ? (
-            <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
+          {!menuToggle ? (
+            <>
+              <form onSubmit={onSubmit}>
+                <NavInput
+                  placeholder="Search..."
+                  type="text"
+                  onChange={onChange}
+                  value={movieSearch}
+                />
+              </form>
+              <MenuIcon
+                onClick={handleMenu}
+                width="20px"
+                src={process.env.PUBLIC_URL + "/MenuBar.png"}
+                alt="MenuBar"
+              />
+            </>
           ) : (
-            <LoginButton to={"/Login"}>로그인</LoginButton>
+            <SideBar>
+              <SideBarBox>
+                <MenuCloseIcon
+                  onClick={handleMenu}
+                  width="20px"
+                  src={process.env.PUBLIC_URL + "/MenuClose.png"}
+                  alt="MenuBar"
+                />
+              </SideBarBox>
+              <SideBarBox list>
+                <SideBarLink onClick={handleClip} to={"/Clip"}>
+                  MyClips
+                </SideBarLink>
+              </SideBarBox>
+              <SideBarBox list>
+                {isLogin ? (
+                  <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
+                ) : (
+                  <SideBarLink to={"/Login"}>로그인</SideBarLink>
+                )}
+              </SideBarBox>
+            </SideBar>
           )}
         </>
       )}

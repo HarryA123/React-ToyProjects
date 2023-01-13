@@ -126,20 +126,21 @@ export const Header = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 100px;
   justify-content: space-between;
-  padding: 0 80px;
   z-index: 1;
   @media (max-width: 768px) {
-    padding: 16px;
     min-width: 350px;
   }
 `;
 
 export const Logo = styled(Link)`
+  margin-left: 80px;
   text-decoration-line: none;
   color: #af1a1a;
   font-weight: bold;
+  @media (max-width: 768px) {
+    margin-left: 16px;
+  }
   &:focus,
   &:hover {
     transform: scale(1.05);
@@ -153,35 +154,83 @@ export const Logo = styled(Link)`
   }
 `;
 
+export const NavInput = styled.input`
+  outline: none;
+  border: none;
+  appearance: none;
+  height: 32px;
+  width: 300px;
+  background-color: transparent;
+  border-bottom: 1px solid gray;
+  color: white;
+  text-align: center;
+`;
 
-export const Clips = styled(Link)`
-  margin-left: auto;
+export const LogoutButton = styled.div`
   color: white;
   text-decoration: none;
-  margin-right: 20px;
-  border: 1px solid red;
-  padding: 3px 10px;
-  border-radius: 4px;
-  background-color: #af1a1a;
-  `;
-
-export const NavInput = styled.input`
-  border: none;
-  padding: 4px;
-  @media (max-width: 768px) {
-    width: 100px;
-  }
-  `;
-
-export const SearchButton = styled.span`
-  color: white;
-  margin-left: 6px;
-  font-weight: bold;
+  padding: 4px 16px;
   cursor: pointer;
-  background-color: #af1a1a;
-  padding: 5px;
+  :visited {
+    color: inherit;
+  }
+`;
+
+export const LoginButton = styled(Link)`
+  color: white;
+  font-size: 10px;
+  text-decoration: none;
+  margin-left: 20px;
+`;
+
+export const MenuIcon = styled.img`
+  margin-left: 12px;
+  margin-right: 80px;
+  z-index: 2;
+  cursor: pointer;
   @media (max-width: 768px) {
-    display: none;
+    margin-right: 16px;
+  }
+`;
+
+export const MenuCloseIcon = styled.img`
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: 80px;
+`;
+
+export const SideBar = styled.div`
+  background-color: black;
+  width: 350px;
+  height: 100vh;
+  display: flex;
+  justify-content: start;
+  position: fixed;
+  top: 0;
+  right: 0;
+  transition: 850ms;
+  flex-direction: column;
+  border-left: 1px solid gray;
+  z-index: 1;
+`;
+export const SideBarBox = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 8px 0 8px 16px;
+  list-style: none;
+  height: 60px;
+  :hover {
+    background-color: ${props => (props.list ? "#af1a1a" : "none")};
+  }
+`;
+
+export const SideBarLink = styled(Link)`
+  color: white;
+  text-decoration: none;
+  padding: 4px 16px;
+  :visited {
+    color: inherit;
   }
 `;
 
@@ -198,7 +247,7 @@ export const DetailTitle = styled.div`
   padding: 0;
   font-weight: bold;
   margin-bottom: 10px;
-  `;
+`;
 export const DetailImage = styled.img`
   height: 200px;
   @media (max-width: 768px) {
@@ -214,7 +263,7 @@ export const DetailRow = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
   }
-  `;
+`;
 
 export const DetailColumn = styled.div`
   display: flex;
@@ -224,21 +273,6 @@ export const DetailColumn = styled.div`
   @media (max-width: 768px) {
     padding: 0;
   }
-  `;
-
-export const LogoutButton = styled.div`
-color: white;
-font-size: 10px;
-text-decoration: none;
-margin-left: 20px;
-cursor: pointer;
-`;
-
-export const LoginButton = styled(Link)`
-  color: white;
-  font-size: 10px;
-  text-decoration: none;
-  margin-left: 20px;
 `;
 
 export const LoginContainer = styled.div`
@@ -246,7 +280,7 @@ export const LoginContainer = styled.div`
   height: 100vh;
   align-items: center;
   justify-content: center;
-  `;
+`;
 
 export const LoginBox = styled.div`
   display: flex;

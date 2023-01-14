@@ -12,8 +12,7 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from 'redux-persist'
-
+} from "redux-persist";
 
 const rootPersistConfig = {
   key: "root",
@@ -23,6 +22,7 @@ const rootPersistConfig = {
 const userPersistConfig = {
   key: "user",
   storage: sessionStorage,
+  whitelist: ["userEmail"],
 };
 
 const rootReducer = combineReducers({
@@ -34,7 +34,7 @@ const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
+  middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
@@ -43,14 +43,3 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
-
-// import { configureStore } from "@reduxjs/toolkit";
-// import movieSlice from "./features/movieSlice";
-// import userSlice from "./features/userSlice";
-
-// export const store = configureStore({
-//   reducer: {
-// movie: movieSlice.reducer,
-// user: userSlice.reducer
-// },
-// });

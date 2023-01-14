@@ -53,7 +53,7 @@ function SignUp() {
   const onSubmit = () => {
     if (!notAllow) {
       dispatch({
-        type: "user/registerUserInfo",
+        type: "user/registerUser",
         info: { email: email, password: password, name: name },
       });
       alert("회원가입이 완료되었습니다");

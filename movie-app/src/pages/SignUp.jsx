@@ -2,7 +2,7 @@ import GlobalStyle from "../GlobalStyle";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import {
   LoginContainer,
@@ -43,6 +43,7 @@ function SignUp() {
   const [notAllow, setNotAllow] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const userEmail = useSelector(state => state.user.userEmail);
 
   const {
     register,
@@ -51,6 +52,10 @@ function SignUp() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = () => {
+    if (email === userEmail) {
+      alert("이미 존재하는 회원 이메일 입니다");
+      return;
+    }
     if (!notAllow) {
       dispatch({
         type: "user/registerUser",

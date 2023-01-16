@@ -26,8 +26,9 @@ npm start
   1. 회원가입<br/>
   2. 로그인<br/>
   3. 로그아웃<br/>
-  4. 영화 키워드 검색<br/>
-  5. 영화 클립<br/>
+  4. 회원 정보 세션 스토리지 저장<br/>
+  5. 영화 키워드 검색<br/>
+  6. 영화 클립<br/>
 
 <br/><br/>
 
@@ -35,13 +36,15 @@ npm start
 
 React
 <br/>
-styled-components
+redux-persist
 <br/>
-Axios
+react-hook-form
+<br/>
+yup
+<br/>
+styled-components
 <br/>
 Redux toolkit
 <br/>
 react-router-dom
 <br/>
-react-intersection-observer
-<br/><br/>

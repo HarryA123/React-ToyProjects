@@ -79,6 +79,9 @@ const HeaderComponent = ({ onSubmit, onChange, movieSearch }) => {
                   <SideBarLink to={"/Login"}>로그인</SideBarLink>
                 )}
               </SideBarBox>
+              {isLogin && <SideBarBox hover>
+                <LogoutButton>회원탈퇴</LogoutButton>
+              </SideBarBox>}
             </SideBar>
           )}
         </>

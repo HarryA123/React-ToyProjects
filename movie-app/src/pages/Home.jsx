@@ -29,29 +29,33 @@ function Home() {
     if (movieSearch.trim() === "") {
       alert("키워드를 입력하세요");
     } else {
-      currentPageNumber.current = 1;
       window.scrollTo(0, 0);
       setMovieName(movieSearch);
-      dispatch(
-        callMovies({
-          movieName: movieName,
-          pageNumber: currentPageNumber.current,
-        })
-      );
+      currentPageNumber.current = 1;
+      FetchMoreMovies();
     }
   };
 
-  useEffect(() => {
-    movies.length !== 0 &&
-      inView &&
-      (currentPageNumber.current = currentPageNumber.current + 1);
+  const FetchMoreMovies = () => {
     dispatch(
       callMovies({
-        movieName: movieName,
+        movieName: movieSearch,
         pageNumber: currentPageNumber.current,
       })
     );
-  }, [inView, movieName]);
+  };
+
+  useEffect(() => {
+    if (movies.length > 0 && inView) {
+      currentPageNumber.current = currentPageNumber.current + 1;
+      FetchMoreMovies();
+    } else {
+      return;
+    }
+    FetchMoreMovies();
+  }, [inView]);
+
+  console.log("first");
 
   return (
     <>
@@ -60,10 +64,7 @@ function Home() {
         onSubmit={onSubmit}
         onChange={onChange}
         movieSearch={movieSearch}
-        setMovieName={setMovieName}
         setMovieSearch={setMovieSearch}
-        currentPageNumber={currentPageNumber}
-        movieName={movieName}
       />
       <>
         {success ? (

@@ -12,11 +12,28 @@ import {
   SideBar,
   SideBarBox,
 } from "./styles";
+import { callMovies } from "../features/movieSlice";
 
-const HeaderComponent = ({ onSubmit, onChange, movieSearch }) => {
+const HeaderComponent = ({
+  onSubmit,
+  onChange,
+  movieSearch,
+  setMovieSearch,
+}) => {
   const [showSideBar, setShowSideBar] = useState(true);
   const isLogin = useSelector(state => state.user.isLogin);
   const dispatch = useDispatch();
+
+  const handleLogo = () => {
+    window.scrollTo(0, 0);
+    setMovieSearch("");
+    dispatch(
+      callMovies({
+        movieName: "",
+        pageNumber: 1,
+      })
+    );
+  };
 
   const handleLogout = e => {
     dispatch({ type: "user/loginState", isLogin: false });
@@ -27,6 +44,7 @@ const HeaderComponent = ({ onSubmit, onChange, movieSearch }) => {
   };
 
   const handleClip = e => {
+    window.scrollTo(0, 0);
     if (!isLogin) {
       e.preventDefault();
       alert("로그인이 필요합니다.");
@@ -37,7 +55,9 @@ const HeaderComponent = ({ onSubmit, onChange, movieSearch }) => {
 
   return (
     <Header>
-      <Logo to={"/"}>MOVIt</Logo>
+      <Logo onClick={handleLogo} to={"/"}>
+        MOVIt
+      </Logo>
       {window.location.pathname === "/" && (
         <>
           {showSideBar ? (
@@ -79,9 +99,11 @@ const HeaderComponent = ({ onSubmit, onChange, movieSearch }) => {
                   <SideBarLink to={"/Login"}>로그인</SideBarLink>
                 )}
               </SideBarBox>
-              {isLogin && <SideBarBox hover>
-                <LogoutButton>회원탈퇴</LogoutButton>
-              </SideBarBox>}
+              {isLogin && (
+                <SideBarBox hover>
+                  <LogoutButton>회원탈퇴</LogoutButton>
+                </SideBarBox>
+              )}
             </SideBar>
           )}
         </>

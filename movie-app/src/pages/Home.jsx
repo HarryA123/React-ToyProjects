@@ -16,7 +16,7 @@ function Home() {
   const [movieSearch, setMovieSearch] = useState("");
   const [movieName, setMovieName] = useState("");
   const currentPageNumber = useRef(1);
-  const { ref, inView } = useInView();
+  let { ref, inView } = useInView();
   const { movies, isLoading, success } = useSelector(state => state.movie);
   const dispatch = useDispatch();
 
@@ -29,18 +29,17 @@ function Home() {
     if (movieSearch.trim() === "") {
       alert("키워드를 입력하세요");
     } else {
-      window.scrollTo(0, 0);
       setMovieName(movieSearch);
       currentPageNumber.current = 1;
-      FetchMoreMovies();
+      FetchMoreMovies(movieSearch, currentPageNumber.current);
     }
   };
 
-  const FetchMoreMovies = () => {
+  const FetchMoreMovies = (movieSearch, currentPageNumber) => {
     dispatch(
       callMovies({
         movieName: movieSearch,
-        pageNumber: currentPageNumber.current,
+        pageNumber: currentPageNumber,
       })
     );
   };
@@ -48,14 +47,11 @@ function Home() {
   useEffect(() => {
     if (movies.length > 0 && inView) {
       currentPageNumber.current = currentPageNumber.current + 1;
-      FetchMoreMovies();
+      FetchMoreMovies(movieSearch, currentPageNumber.current);
     } else {
       return;
     }
-    FetchMoreMovies();
   }, [inView]);
-
-  console.log("first");
 
   return (
     <>

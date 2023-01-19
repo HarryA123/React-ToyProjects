@@ -53,6 +53,11 @@ const HeaderComponent = ({
     }
   };
 
+  const handleWithdrwal = () => {
+    dispatch({ type: "user/withdrawalUser" });
+    alert("탈퇴되었습니다.")
+  };
+
   return (
     <Header>
       <Logo onClick={handleLogo} to={"/"}>
@@ -101,7 +106,9 @@ const HeaderComponent = ({
               </SideBarBox>
               {isLogin && (
                 <SideBarBox hover>
-                  <LogoutButton>회원탈퇴</LogoutButton>
+                  <LogoutButton onClick={handleWithdrwal}>
+                    회원탈퇴
+                  </LogoutButton>
                 </SideBarBox>
               )}
             </SideBar>

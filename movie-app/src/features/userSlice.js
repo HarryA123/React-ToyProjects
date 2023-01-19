@@ -14,6 +14,11 @@ export const userSlice = createSlice({
         state.userEmail = action.info.email;
       }
     },
+    withdrawalUser: (state, action) => {
+      state.user = [];
+      state.userEmail = "";
+      state.isLogin = false;
+    },
     loginState: (state, action) => {
       if (action.isLogin === true) {
         state.isLogin = true;

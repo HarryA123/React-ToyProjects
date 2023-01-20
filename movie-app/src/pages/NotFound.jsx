@@ -1,10 +1,8 @@
-import GlobalStyle from "../GlobalStyle";
 import HeaderComponent from "../components/HomeButton";
 
 function NotFound() {
   return (
     <>
-      <GlobalStyle />
       <HeaderComponent />
       <div
         style={{

@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import GlobalStyle from "../GlobalStyle";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { callMovieDetail } from "../features/movieSlice";
@@ -31,7 +30,6 @@ function Detail() {
   }, []);
   return (
     <>
-      <GlobalStyle />
       <HeaderComponent />
       <DetailContainer>
         {isLoading ? (

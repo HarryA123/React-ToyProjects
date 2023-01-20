@@ -1,5 +1,5 @@
 import { useInView } from "react-intersection-observer";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import {
   Spinner,
   FindError,
@@ -8,7 +8,6 @@ import {
 } from "../components/styles";
 import Movie from "../components/Movie";
 import HeaderComponent from "../components/HomeButton";
-import GlobalStyle from "../GlobalStyle";
 import { useSelector, useDispatch } from "react-redux";
 import { callMovies } from "../features/movieSlice";
 
@@ -35,14 +34,14 @@ function Home() {
     }
   };
 
-  const FetchMoreMovies = (movieSearch, currentPageNumber) => {
+  const FetchMoreMovies = useCallback((movieSearch, currentPageNumber) => {
     dispatch(
       callMovies({
         movieName: movieSearch,
         pageNumber: currentPageNumber,
       })
     );
-  };
+  },[]);
 
   useEffect(() => {
     if (movies.length > 0 && inView) {
@@ -55,7 +54,6 @@ function Home() {
 
   return (
     <>
-      <GlobalStyle />
       <HeaderComponent
         onSubmit={onSubmit}
         onChange={onChange}

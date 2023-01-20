@@ -1,4 +1,3 @@
-import GlobalStyle from "../GlobalStyle";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -88,7 +87,6 @@ function Login() {
   };
   return (
     <>
-      <GlobalStyle />
       <LoginContainer>
         <LoginBox>
           <LoginText>

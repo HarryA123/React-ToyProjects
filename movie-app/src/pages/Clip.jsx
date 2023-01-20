@@ -1,4 +1,3 @@
-import GlobalStyle from "../GlobalStyle";
 import HeaderComponent from "../components/HomeButton";
 import { ClipListContainer, PageTitle } from "../components/styles";
 import Movie from "../components/Movie";
@@ -8,7 +7,6 @@ function Clip() {
 
   return (
     <>
-      <GlobalStyle />
       <HeaderComponent />
       <PageTitle>내가 관람한 영화</PageTitle>
       <ClipListContainer>
